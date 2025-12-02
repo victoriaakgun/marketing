@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мини-гайд от neurosphere.pro по подготовке к Новому Году 🎄</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            padding: 20px;
+            line-height: 1.6;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        /* СНЕЖИНКИ ПО ВСЕМУ БУКЛЕТУ */
+        .snowflakes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 10;
+            overflow: hidden;
+        }
+        
+        .snowflake {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.5em;
+            user-select: none;
+            animation: fall linear infinite;
+        }
+        
+        @keyframes fall {
+            0% {
+                top: -10%;
+                opacity: 1;
+            }
+            100% {
+                top: 110%;
+                opacity: 0.3;
+            }
+        }
+        
+        /* Разные скорости и задержки для естественности */
+        .snowflake:nth-child(1) { left: 5%; animation-duration: 10s; animation-delay: 0s; }
+        .snowflake:nth-child(2) { left: 15%; animation-duration: 12s; animation-delay: 2s; }
+        .snowflake:nth-child(3) { left: 25%; animation-duration: 9s; animation-delay: 4s; }
+        .snowflake:nth-child(4) { left: 35%; animation-duration: 11s; animation-delay: 1s; }
+        .snowflake:nth-child(5) { left: 45%; animation-duration: 13s; animation-delay: 3s; }
+        .snowflake:nth-child(6) { left: 55%; animation-duration: 10s; animation-delay: 5s; }
+        .snowflake:nth-child(7) { left: 65%; animation-duration: 12s; animation-delay: 0.5s; }
+        .snowflake:nth-child(8) { left: 75%; animation-duration: 9s; animation-delay: 2.5s; }
+        .snowflake:nth-child(9) { left: 85%; animation-duration: 11s; animation-delay: 4.5s; }
+        .snowflake:nth-child(10) { left: 95%; animation-duration: 13s; animation-delay: 1.5s; }
+        .snowflake:nth-child(11) { left: 10%; animation-duration: 14s; animation-delay: 3.5s; }
+        .snowflake:nth-child(12) { left: 20%; animation-duration: 10s; animation-delay: 5.5s; }
+        .snowflake:nth-child(13) { left: 30%; animation-duration: 12s; animation-delay: 2.2s; }
+        .snowflake:nth-child(14) { left: 40%; animation-duration: 11s; animation-delay: 4.2s; }
+        .snowflake:nth-child(15) { left: 50%; animation-duration: 13s; animation-delay: 0.8s; }
+        .snowflake:nth-child(16) { left: 60%; animation-duration: 9s; animation-delay: 3.8s; }
+        .snowflake:nth-child(17) { left: 70%; animation-duration: 10s; animation-delay: 1.3s; }
+        .snowflake:nth-child(18) { left: 80%; animation-duration: 12s; animation-delay: 5.3s; }
+        .snowflake:nth-child(19) { left: 90%; animation-duration: 11s; animation-delay: 2.8s; }
+        .snowflake:nth-child(20) { left: 8%; animation-duration: 13s; animation-delay: 4.8s; }
+        
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Снежинки внутри контейнера */
+        .container .snowflakes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 10;
+            overflow: hidden;
+        }
+        
+        /* Брендовые цвета: бледно-изумрудно-зеленый + светло-фиолетовый */
+        .header {
+            background: linear-gradient(135deg, #a7f3d0 0%, #6ee7b7 25%, #c4b5fd 75%, #ddd6fe 100%);
+            padding: 40px 30px;
+            text-align: center;
+            color: #1a1a2e;
+            position: relative;
+        }
+        
+        .header h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(255,255,255,0.3);
+        }
+        
+        .header p {
+            font-size: 18px;
+            font-weight: 500;
+        }
+        
+        .content {
+            padding: 30px;
+        }
+        
+        .intro {
+            text-align: center;
+            margin-bottom: 40px;
+            color: #333;
+        }
+        
+        .intro h2 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #1a1a2e;
+        }
+        
+        .tool-card {
+            background: #f8f9fa;
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 20px;
+            border: 2px solid #e9ecef;
+            transition: all 0.3s ease;
+        }
+        
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(110, 231, 183, 0.2);
+            border-color: #6ee7b7;
+        }
+        
+        .tool-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .tool-icon {
+            font-size: 36px;
+            margin-right: 15px;
+        }
+        
+        .tool-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1a1a2e;
+        }
+        
+        .tool-description {
+            color: #495057;
+            margin-bottom: 15px;
+            line-height: 1.7;
+        }
+        
+        .tool-highlight {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            padding: 10px 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            font-style: italic;
+            color: #78350f;
+            font-size: 14px;
+        }
+        
+        /* Все кнопки одинакового размера в брендовых цветах */
+        .cta-button {
+            display: block;
+            width: 100%;
+            background: linear-gradient(135deg, #6ee7b7 0%, #a7f3d0 50%, #c4b5fd 100%);
+            color: #1a1a2e;
+            padding: 16px 28px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(110, 231, 183, 0.3);
+            border: none;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(110, 231, 183, 0.5);
+            background: linear-gradient(135deg, #34d399 0%, #6ee7b7 50%, #a78bfa 100%);
+        }
+        
+        .divider {
+            height: 2px;
+            background: linear-gradient(90deg, transparent 0%, #6ee7b7 30%, #c4b5fd 70%, transparent 100%);
+            margin: 30px 0;
+        }
+        
+        /* Новогодняя плашка с конем */
+        .new-year-banner {
+            background: linear-gradient(135deg, #a7f3d0 0%, #6ee7b7 25%, #c4b5fd 75%, #ddd6fe 100%);
+            color: #1a1a2e;
+            padding: 40px 30px;
+            border-radius: 16px;
+            text-align: center;
+            margin: 30px 0 0 0;
+            position: relative;
+        }
+        
+        .new-year-banner h3 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        
+        .horse-container {
+            max-width: 300px;
+            margin: 20px auto;
+            position: relative;
+        }
+        
+        .horse-image {
+            width: 100%;
+            height: auto;
+            filter: drop-shadow(0 10px 30px rgba(251, 191, 36, 0.4));
+            animation: gentle-float 3s ease-in-out infinite;
+        }
+        
+        @keyframes gentle-float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .sparkles-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        
+        .sparkle {
+            position: absolute;
+            font-size: 24px;
+            animation: twinkle 2s ease-in-out infinite;
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.3); }
+        }
+        
+        .footer {
+            background: #1a1a2e;
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .footer p {
+            margin: 10px 0;
+            opacity: 0.9;
+        }
+        
+        @media (max-width: 600px) {
+            .header h1 {
+                font-size: 26px;
+            }
+            
+            .header p {
+                font-size: 16px;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .tool-card {
+                padding: 20px;
+            }
+            
+            .tool-title {
+                font-size: 18px;
+            }
+            
+            .new-year-banner h3 {
+                font-size: 24px;
+            }
+            
+            .horse-container {
+                max-width: 200px;
+            }
+            
+            .snowflake {
+                font-size: 1.2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- СНЕЖИНКИ ПО ВСЕМУ БУКЛЕТУ -->
+        <div class="snowflakes" aria-hidden="true">
+            <div class="snowflake">❄</div>
+            <div class="snowflake">❅</div>
+            <div class="snowflake">❆</div>
+            <div class="snowflake">❄</div>
+            <div class="snowflake">❅</div>
+            <div class="snowflake">❆</div>
+            <div class="snowflake">❄</div>
+            <div class="snowflake">❅</div>
+            <div class="snowflake">❆</div>
+            <div class="snowflake">❄</div>
+            <div class="snowflake">❅</div>
+            <div class="snowflake">❆</div>
+            <div class="snowflake">❄</div>
+            <div class="snowflake">❅</div>
+            <div class="snowflake">❆</div>
+            <div class="snowflake">❄</div>
+            <div class="snowflake">❅</div>
+            <div class="snowflake">❆</div>
+            <div class="snowflake">❄</div>
+            <div class="snowflake">❅</div>
+        </div>
+
+        <!-- Header -->
+        <div class="header">
+            <h1>🎄 Мини-гайд от neurosphere.pro по подготовке к Новому Году</h1>
+            <p>Волшебство за один клик ✨</p>
+        </div>
+        
+        <!-- Content -->
+        <div class="content">
+            <div class="intro">
+                <h2>4 готовых инструмента для праздника</h2>
+                <p>Для тёплых поздравлений, семейных воспоминаний и новогоднего настроения. Всё работает в один клик 💫</p>
+            </div>
+            
+            <div class="divider"></div>
+            
+            <!-- Tool 1 -->
+            <div class="tool-card">
+                <div class="tool-header">
+                    <div class="tool-icon">🎁</div>
+                    <div class="tool-title">Поздравление от Деда Мороза</div>
+                </div>
+                <div class="tool-description">
+                    Теплое видео-поздравление для родных — от Деда Мороза и Снегурочки с вашим текстом, голосом и эмоциями.
+                </div>
+                <div class="tool-highlight">
+                    Для мамы, детей, любимых, друзей
+                </div>
+                <a href="https://neurosphere.pro/tools/new-year-greeting" class="cta-button">🎅 Создать поздравление</a>
+            </div>
+            
+            <!-- Tool 2 -->
+            <div class="tool-card">
+                <div class="tool-header">
+                    <div class="tool-icon">🖤</div>
+                    <div class="tool-title">Чёрно-белый семейный снимок</div>
+                </div>
+                <div class="tool-description">
+                    Трогательный портрет с близким человеком — мама и ребёнок, пара, семья в стиле "кино и вечность".
+                </div>
+                <div class="tool-highlight">
+                    Сохраните момент, распечатайте, подарите
+                </div>
+                <a href="https://neurosphere.pro/tools/black-white-portrait" class="cta-button">🖤 Создать портрет</a>
+            </div>
+            
+            <!-- Tool 3 -->
+            <div class="tool-card">
+                <div class="tool-header">
+                    <div class="tool-icon">🎬</div>
+                    <div class="tool-title">Оживите фото из 2025</div>
+                </div>
+                <div class="tool-description">
+                    Превратите любимую фотографию в живое видео — с движением, мимикой и эмоциями, как в фильме.
+                </div>
+                <div class="tool-highlight">
+                    Для Reels, сторис, поздравлений
+                </div>
+                <a href="https://neurosphere.pro/tools/animate-photo" class="cta-button">🎥 Оживить фото</a>
+            </div>
+            
+            <!-- Tool 4 -->
+            <div class="tool-card">
+                <div class="tool-header">
+                    <div class="tool-icon">▶️</div>
+                    <div class="tool-title">YouTube-обложка в стиле зимней сказки</div>
+                </div>
+                <div class="tool-description">
+                    Праздничная обложка для канала или видео — привлекает внимание, создаёт настроение, выделяет в ленте.
+                </div>
+                <div class="tool-highlight">
+                    Уютная, кинематографичная, трендовая
+                </div>
+                <a href="https://neurosphere.pro/tools/youtube-cover" class="cta-button">▶️ Создать обложку</a>
+            </div>
+            
+            <div class="divider"></div>
+            
+            <!-- New Year Banner with Beautiful Horse -->
+            <div class="new-year-banner">
+                <h3>С наступающим 2026 годом! 🐴</h3>
+                
+                <div class="horse-container">
+                    <!-- Используем эмодзи коня - самый простой и красивый вариант -->
+                    <div style="font-size: 180px; line-height: 1; filter: drop-shadow(0 10px 30px rgba(251, 191, 36, 0.5));">
+                        🐎
+                    </div>
+                    
+                    <!-- Блёстки вокруг -->
+                    <div class="sparkles-container">
+                        <span class="sparkle" style="top: 10%; left: 10%; animation-delay: 0s;">✨</span>
+                        <span class="sparkle" style="top: 15%; right: 15%; animation-delay: 0.5s;">⭐</span>
+                        <span class="sparkle" style="bottom: 20%; left: 15%; animation-delay: 1s;">✨</span>
+                        <span class="sparkle" style="bottom: 25%; right: 10%; animation-delay: 1.5s;">⭐</span>
+                        <span class="sparkle" style="top: 40%; left: 5%; animation-delay: 0.3s;">💫</span>
+                        <span class="sparkle" style="top: 45%; right: 5%; animation-delay: 1.3s;">✨</span>
+                    </div>
+                </div>
+                
+                <p style="font-size: 16px; margin-top: 20px; opacity: 0.9;">
+                    Пусть год Деревянной Лошади принесёт волшебство в каждый клик! 🌟
+                </p>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer">
+            <p>С теплом, заботой и капелькой волшебства ✨</p>
+            <p><strong>Команда Neurosphere</strong> 🎄</p>
+            <p style="margin-top: 20px; font-size: 14px; opacity: 0.8;">
+                Если что-то не получится — пишите в поддержку, поможем создать идеальный результат 💛
+            </p>
+        </div>
+    </div>
+</body>
+</html>
