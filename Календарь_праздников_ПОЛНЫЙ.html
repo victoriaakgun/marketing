@@ -1,0 +1,1226 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Календарь праздников России 2025 | Контент-план neurosphere.pro</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 15px;
+            line-height: 1.6;
+            color: #212529;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #a7f3d0 0%, #6ee7b7 25%, #c4b5fd 75%, #ddd6fe 100%);
+            padding: 30px 20px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 8px;
+            color: #1a1a2e;
+        }
+        
+        .header p {
+            font-size: 16px;
+            color: #495057;
+        }
+        
+        .content {
+            padding: 20px;
+        }
+        
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            margin-bottom: 25px;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .category {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        
+        .cat-state {
+            background: linear-gradient(135deg, #fecaca 0%, #fca5a5 100%);
+            color: #7f1d1d;
+        }
+        
+        .cat-prof {
+            background: linear-gradient(135deg, #bfdbfe 0%, #93c5fd 100%);
+            color: #1e3a8a;
+        }
+        
+        .cat-common {
+            background: linear-gradient(135deg, #fde68a 0%, #fcd34d 100%);
+            color: #78350f;
+        }
+        
+        .cat-religious {
+            background: linear-gradient(135deg, #ddd6fe 0%, #c4b5fd 100%);
+            color: #5b21b6;
+        }
+        
+        .cat-folk {
+            background: linear-gradient(135deg, #a7f3d0 0%, #6ee7b7 100%);
+            color: #064e3b;
+        }
+        
+        .cat-family {
+            background: linear-gradient(135deg, #fecdd3 0%, #fda4af 100%);
+            color: #881337;
+        }
+        
+        .stats-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+        }
+        
+        .stats-section h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: #1a1a2e;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 15px;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 20px 15px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .stat-number {
+            font-size: 32px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #6ee7b7 0%, #c4b5fd 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .stat-label {
+            font-size: 13px;
+            color: #6c757d;
+            margin-top: 5px;
+        }
+        
+        .top-holidays {
+            background: linear-gradient(135deg, #fff7ed 0%, #fed7aa 100%);
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+        }
+        
+        .top-holidays h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: #1a1a2e;
+        }
+        
+        .holiday-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background: white;
+            border-radius: 8px;
+            margin-bottom: 8px;
+        }
+        
+        .holiday-rank {
+            font-size: 20px;
+            font-weight: 700;
+            min-width: 35px;
+        }
+        
+        .holiday-info {
+            flex: 1;
+        }
+        
+        .holiday-name {
+            font-weight: 600;
+            font-size: 14px;
+            color: #1a1a2e;
+        }
+        
+        .holiday-date {
+            font-size: 12px;
+            color: #6c757d;
+        }
+        
+        .engagement {
+            font-size: 16px;
+        }
+        
+        .month-section {
+            margin-bottom: 35px;
+        }
+        
+        .month-header {
+            background: linear-gradient(135deg, #6ee7b7 0%, #c4b5fd 100%);
+            padding: 15px 20px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        
+        .month-header h2 {
+            font-size: 24px;
+            color: #1a1a2e;
+        }
+        
+        .holiday-card {
+            background: white;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+        }
+        
+        .holiday-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .holiday-card.state {
+            border-left-color: #f87171;
+        }
+        
+        .holiday-card.prof {
+            border-left-color: #60a5fa;
+        }
+        
+        .holiday-card.common {
+            border-left-color: #fbbf24;
+        }
+        
+        .holiday-card.religious {
+            border-left-color: #a78bfa;
+        }
+        
+        .holiday-card.folk {
+            border-left-color: #34d399;
+        }
+        
+        .holiday-card.family {
+            border-left-color: #fb7185;
+        }
+        
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .card-date {
+            font-weight: 700;
+            color: #1a1a2e;
+            font-size: 14px;
+        }
+        
+        .card-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #212529;
+            margin-bottom: 8px;
+        }
+        
+        .card-ideas {
+            font-size: 13px;
+            color: #6c757d;
+            font-style: italic;
+            line-height: 1.5;
+        }
+        
+        .footer {
+            background: #1a1a2e;
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+        
+        .footer p {
+            margin: 8px 0;
+            font-size: 14px;
+        }
+        
+        /* Мобильная адаптация */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .header h1 {
+                font-size: 22px;
+            }
+            
+            .header p {
+                font-size: 14px;
+            }
+            
+            .content {
+                padding: 15px;
+            }
+            
+            .legend {
+                padding: 15px;
+                gap: 8px;
+            }
+            
+            .category {
+                font-size: 11px;
+                padding: 5px 10px;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+            
+            .stat-card {
+                padding: 15px 10px;
+            }
+            
+            .stat-number {
+                font-size: 28px;
+            }
+            
+            .month-header {
+                padding: 12px 15px;
+            }
+            
+            .month-header h2 {
+                font-size: 20px;
+            }
+            
+            .holiday-card {
+                padding: 12px;
+            }
+            
+            .card-title {
+                font-size: 15px;
+            }
+            
+            .card-ideas {
+                font-size: 12px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📅 Календарь праздников России 2025</h1>
+            <p>Полный справочник для контент-планирования neurosphere.pro</p>
+        </div>
+        
+        <div class="content">
+            <!-- Легенда -->
+            <div class="legend">
+                <div class="legend-item">
+                    <span class="category cat-state">🇷🇺 Государственные</span>
+                </div>
+                <div class="legend-item">
+                    <span class="category cat-prof">👨‍💼 Профессиональные</span>
+                </div>
+                <div class="legend-item">
+                    <span class="category cat-common">🎉 Общие</span>
+                </div>
+                <div class="legend-item">
+                    <span class="category cat-religious">⛪ Религиозные</span>
+                </div>
+                <div class="legend-item">
+                    <span class="category cat-folk">🌾 Народные</span>
+                </div>
+                <div class="legend-item">
+                    <span class="category cat-family">👨‍👩‍👧‍👦 Семейные</span>
+                </div>
+            </div>
+            
+            <!-- Статистика -->
+            <div class="stats-section">
+                <h3>📊 Статистика по категориям</h3>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">25</div>
+                        <div class="stat-label">Государственных</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">20</div>
+                        <div class="stat-label">Общих</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">18</div>
+                        <div class="stat-label">Профессиональных</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">10</div>
+                        <div class="stat-label">Семейных</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">9</div>
+                        <div class="stat-label">Религиозных</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">8</div>
+                        <div class="stat-label">Народных</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- ТОП-10 праздников -->
+            <div class="top-holidays">
+                <h3>🔥 ТОП-10 главных праздников для контента</h3>
+                
+                <div class="holiday-item">
+                    <div class="holiday-rank">1️⃣</div>
+                    <div class="holiday-info">
+                        <div class="holiday-name">Новый год</div>
+                        <div class="holiday-date">31 декабря</div>
+                    </div>
+                    <div class="engagement">🔥🔥🔥🔥🔥</div>
+                </div>
+                
+                <div class="holiday-item">
+                    <div class="holiday-rank">2️⃣</div>
+                    <div class="holiday-info">
+                        <div class="holiday-name">День Победы</div>
+                        <div class="holiday-date">9 мая</div>
+                    </div>
+                    <div class="engagement">🔥🔥🔥🔥🔥</div>
+                </div>
+                
+                <div class="holiday-item">
+                    <div class="holiday-rank">3️⃣</div>
+                    <div class="holiday-info">
+                        <div class="holiday-name">Международный женский день</div>
+                        <div class="holiday-date">8 марта</div>
+                    </div>
+                    <div class="engagement">🔥🔥🔥🔥🔥</div>
+                </div>
+                
+                <div class="holiday-item">
+                    <div class="holiday-rank">4️⃣</div>
+                    <div class="holiday-info">
+                        <div class="holiday-name">День защитника Отечества</div>
+                        <div class="holiday-date">23 февраля</div>
+                    </div>
+                    <div class="engagement">🔥🔥🔥🔥</div>
+                </div>
+                
+                <div class="holiday-item">
+                    <div class="holiday-rank">5️⃣</div>
+                    <div class="holiday-info">
+                        <div class="holiday-name">День знаний</div>
+                        <div class="holiday-date">1 сентября</div>
+                    </div>
+                    <div class="engagement">🔥🔥🔥🔥</div>
+                </div>
+                
+                <div class="holiday-item">
+                    <div class="holiday-rank">6️⃣</div>
+                    <div class="holiday-info">
+                        <div class="holiday-name">День святого Валентина</div>
+                        <div class="holiday-date">14 февраля</div>
+                    </div>
+                    <div class="engagement">🔥🔥🔥</div>
+                </div>
+                
+                <div class="holiday-item">
+                    <div class="holiday-rank">7️⃣</div>
+                    <div class="holiday-info">
+                        <div class="holiday-name">День России</div>
+                        <div class="holiday-date">12 июня</div>
+                    </div>
+                    <div class="engagement">🔥🔥🔥🔥</div>
+                </div>
+                
+                <div class="holiday-item">
+                    <div class="holiday-rank">8️⃣</div>
+                    <div class="holiday-info">
+                        <div class="holiday-name">День учителя</div>
+                        <div class="holiday-date">5 октября</div>
+                    </div>
+                    <div class="engagement">🔥🔥🔥</div>
+                </div>
+                
+                <div class="holiday-item">
+                    <div class="holiday-rank">9️⃣</div>
+                    <div class="holiday-info">
+                        <div class="holiday-name">Рождество</div>
+                        <div class="holiday-date">7 января</div>
+                    </div>
+                    <div class="engagement">🔥🔥🔥</div>
+                </div>
+                
+                <div class="holiday-item">
+                    <div class="holiday-rank">🔟</div>
+                    <div class="holiday-info">
+                        <div class="holiday-name">День матери</div>
+                        <div class="holiday-date">28 ноября</div>
+                    </div>
+                    <div class="engagement">🔥🔥🔥</div>
+                </div>
+            </div>
+            
+            <!-- ЯНВАРЬ -->
+            <div class="month-section">
+                <div class="month-header">
+                    <h2>🗓️ ЯНВАРЬ</h2>
+                </div>
+                
+                <div class="holiday-card common">
+                    <div class="card-header">
+                        <span class="card-date">1 января</span>
+                        <span class="category cat-common">🎉 Общий</span>
+                    </div>
+                    <div class="card-title">Новый год</div>
+                    <div class="card-ideas">Поздравления, итоги года, планы на будущее, новогодние генераторы</div>
+                </div>
+                
+                <div class="holiday-card religious">
+                    <div class="card-header">
+                        <span class="card-date">7 января</span>
+                        <span class="category cat-religious">⛪ Религиозный</span>
+                    </div>
+                    <div class="card-title">Рождество Христово</div>
+                    <div class="card-ideas">Рождественские истории, традиции, семейные ценности</div>
+                </div>
+                
+                <div class="holiday-card folk">
+                    <div class="card-header">
+                        <span class="card-date">13-14 января</span>
+                        <span class="category cat-folk">🌾 Народный</span>
+                    </div>
+                    <div class="card-title">Старый Новый год</div>
+                    <div class="card-ideas">Вторая волна поздравлений, народные приметы</div>
+                </div>
+                
+                <div class="holiday-card religious">
+                    <div class="card-header">
+                        <span class="card-date">19 января</span>
+                        <span class="category cat-religious">⛪ Религиозный</span>
+                    </div>
+                    <div class="card-title">Крещение Господне</div>
+                    <div class="card-ideas">Крещенские традиции, купание в проруби</div>
+                </div>
+                
+                <div class="holiday-card prof">
+                    <div class="card-header">
+                        <span class="card-date">25 января</span>
+                        <span class="category cat-prof">👨‍💼 Профессиональный</span>
+                    </div>
+                    <div class="card-title">Татьянин день / День студента</div>
+                    <div class="card-ideas">Поздравления студентов, студенческие традиции</div>
+                </div>
+                
+                <div class="holiday-card state">
+                    <div class="card-header">
+                        <span class="card-date">27 января</span>
+                        <span class="category cat-state">🇷🇺 Государственный</span>
+                    </div>
+                    <div class="card-title">День снятия блокады Ленинграда</div>
+                    <div class="card-ideas">Память, история, подвиг ленинградцев</div>
+                </div>
+            </div>
+            
+            <!-- ФЕВРАЛЬ -->
+            <div class="month-section">
+                <div class="month-header">
+                    <h2>🗓️ ФЕВРАЛЬ</h2>
+                </div>
+                
+                <div class="holiday-card state">
+                    <div class="card-header">
+                        <span class="card-date">8 февраля</span>
+                        <span class="category cat-state">🇷🇺 Государственный</span>
+                    </div>
+                    <div class="card-title">День российской науки</div>
+                    <div class="card-ideas">Научные достижения, инновации, AI и технологии</div>
+                </div>
+                
+                <div class="holiday-card common">
+                    <div class="card-header">
+                        <span class="card-date">14 февраля</span>
+                        <span class="category cat-common">🎉 Общий</span>
+                    </div>
+                    <div class="card-title">День святого Валентина</div>
+                    <div class="card-ideas">Романтика, любовь, подарки, генераторы валентинок</div>
+                </div>
+                
+                <div class="holiday-card religious">
+                    <div class="card-header">
+                        <span class="card-date">15 февраля</span>
+                        <span class="category cat-religious">⛪ Религиозный</span>
+                    </div>
+                    <div class="card-title">Сретение Господне</div>
+                    <div class="card-ideas">Религиозные традиции, духовные темы</div>
+                </div>
+                
+                <div class="holiday-card state">
+                    <div class="card-header">
+                        <span class="card-date">23 февраля</span>
+                        <span class="category cat-state">🇷🇺 Государственный</span>
+                    </div>
+                    <div class="card-title">День защитника Отечества</div>
+                    <div class="card-ideas">Поздравления мужчин, армия, мужество, генераторы открыток</div>
+                </div>
+            </div>
+            
+            <!-- МАРТ -->
+            <div class="month-section">
+                <div class="month-header">
+                    <h2>🗓️ МАРТ</h2>
+                </div>
+                
+                <div class="holiday-card folk">
+                    <div class="card-header">
+                        <span class="card-date">1-7 марта</span>
+                        <span class="category cat-folk">🌾 Народный</span>
+                    </div>
+                    <div class="card-title">Масленица</div>
+                    <div class="card-ideas">Блины, гулянья, проводы зимы, народные традиции</div>
+                </div>
+                
+                <div class="holiday-card common">
+                    <div class="card-header">
+                        <span class="card-date">8 марта</span>
+                        <span class="category cat-common">🎉 Общий</span>
+                    </div>
+                    <div class="card-title">Международный женский день</div>
+                    <div class="card-ideas">Поздравления женщин, весна, красота, генераторы открыток</div>
+                </div>
+                
+                <div class="holiday-card state">
+                    <div class="card-header">
+                        <span class="card-date">18 марта</span>
+                        <span class="category cat-state">🇷🇺 Государственный</span>
+                    </div>
+                    <div class="card-title">День воссоединения Крыма с Россией</div>
+                    <div class="card-ideas">Патриотизм, история, единство</div>
+                </div>
+                
+                <div class="holiday-card common">
+                    <div class="card-header">
+                        <span class="card-date">21 марта</span>
+                        <span class="category cat-common">🎉 Общий</span>
+                    </div>
+                    <div class="card-title">Всемирный день поэзии</div>
+                    <div class="card-ideas">Стихи, литература, генераторы поэзии</div>
+                </div>
+                
+                <div class="holiday-card common">
+                    <div class="card-header">
+                        <span class="card-date">27 марта</span>
+                        <span class="category cat-common">🎉 Общий</span>
+                    </div>
+                    <div class="card-title">Всемирный день театра</div>
+                    <div class="card-ideas">Театр, культура, искусство</div>
+                </div>
+            </div>
+            
+            <!-- АПРЕЛЬ -->
+            <div class="month-section">
+                <div class="month-header">
+                    <h2>🗓️ АПРЕЛЬ</h2>
+                </div>
+                
+                <div class="holiday-card common">
+                    <div class="card-header">
+                        <span class="card-date">1 апреля</span>
+                        <span class="category cat-common">🎉 Общий</span>
+                    </div>
+                    <div class="card-title">День смеха</div>
+                    <div class="card-ideas">Юмор, шутки, розыгрыши, веселый контент</div>
+                </div>
+                
+                <div class="holiday-card common">
+                    <div class="card-header">
+                        <span class="card-date">7 апреля</span>
+                        <span class="category cat-common">🎉 Общий</span>
+                    </div>
+                    <div class="card-title">Всемирный день здоровья</div>
+                    <div class="card-ideas">ЗОЖ, спорт, здоровое питание, wellness</div>
+                </div>
+                
+                <div class="holiday-card state">
+                    <div class="card-header">
+                        <span class="card-date">12 апреля</span>
+                        <span class="category cat-state">🇷🇺 Государственный</span>
+                    </div>
+                    <div class="card-title">День космонавтики</div>
+                    <div class="card-ideas">Космос, Гагарин, наука, достижения</div>
+                </div>
+                
+                <div class="holiday-card religious">
+                    <div class="card-header">
+                        <span class="card-date">20 апреля</span>
+                        <span class="category cat-religious">⛪ Религиозный</span>
+                    </div>
+                    <div class="card-title">Пасха (Светлое Христово Воскресение)</div>
+                    <div class="card-ideas">Куличи, яйца, пасхальные традиции, семья</div>
+                </div>
+            </div>
+            
+            <!-- МАЙ -->
+            <div class="month-section">
+                <div class="month-header">
+                    <h2>🗓️ МАЙ</h2>
+                </div>
+                
+                <div class="holiday-card state">
+                    <div class="card-header">
+                        <span class="card-date">1 мая</span>
+                        <span class="category cat-state">🇷🇺 Государственный</span>
+                    </div>
+                    <div class="card-title">Праздник Весны и Труда</div>
+                    <div class="card-ideas">Труд, весна, отдых, майские праздники</div>
+                </div>
+                
+                <div class="holiday-card prof">
+                    <div class="card-header">
+                        <span class="card-date">7 мая</span>
+                        <span class="category cat-prof">👨‍💼 Профессиональный</span>
+                    </div>
+                    <div class="card-title">День радио</div>
+                    <div class="card-ideas">Радио, связь, коммуникации</div>
+                </div>
+                
+                <div class="holiday-card state">
+                    <div class="card-header">
+                        <span class="card-date">9 мая</span>
+                        <span class="category cat-state">🇷🇺 Государственный</span>
+                    </div>
+                    <div class="card-title">День Победы</div>
+                    <div class="card-ideas">ВОВ, ветераны, память, георгиевская лента, поздравления</div>
+                </div>
+                
+                <div class="holiday-card family">
+                    <div class="card-header">
+                        <span class="card-date">15 мая</span>
+                        <span class="category cat-family">👨‍👩‍👧‍👦 Семейный</span>
+                    </div>
+                    <div class="card-title">Международный день семьи</div>
+                    <div class="card-ideas">Семейные ценности, традиции, фотосессии</div>
+                </div>
+                
+                <div class="holiday-card common">
+                    <div class="card-header">
+                        <span class="card-date">18 мая</span>
+                        <span class="category cat-common">🎉 Общий</span>
+                    </div>
+                    <div class="card-title">Международный день музеев</div>
+                    <div class="card-ideas">Культура, музеи, искусство, история</div>
+                </div>
+                
+                <div class="holiday-card state">
+                    <div class="card-header">
+                        <span class="card-date">24 мая</span>
+                        <span class="category cat-state">🇷🇺 Государственный</span>
+                    </div>
+                    <div class="card-title">День славянской письменности и культуры</div>
+                    <div class="card-ideas">Кирилл и Мефодий, язык, образование</div>
+                </div>
+                
+                <div class="holiday-card prof">
+                    <div class="card-header">
+                        <span class="card-date">27 мая</span>
+                        <span class="category cat-prof">👨‍💼 Профессиональный</span>
+                    </div>
+                    <div class="card-title">Общероссийский день библиотек</div>
+                    <div class="card-ideas">Книги, библиотеки, чтение</div>
+                </div>
+                
+                <div class="holiday-card prof">
+                    <div class="card-header">
+                        <span class="card-date">28 мая</span>
+                        <span class="category cat-prof">👨‍💼 Профессиональный</span>
+                    </div>
+                    <div class="card-title">День пограничника</div>
+                    <div class="card-ideas">Пограничники, служба, защита границ</div>
+                </div>
+            </div>
+            
+            <!-- ИЮНЬ -->
+            <div class="month-section">
+                <div class="month-header">
+                    <h2>🗓️ ИЮНЬ</h2>
+                </div>
+                
+                <div class="holiday-card family">
+                    <div class="card-header">
+                        <span class="card-date">1 июня</span>
+                        <span class="category cat-family">👨‍👩‍👧‍👦 Семейный</span>
+                    </div>
+                    <div class="card-title">День защиты детей</div>
+                    <div class="card-ideas">Дети, семья, детство, радость, игры</div>
+                </div>
+                
+                <div class="holiday-card state">
+                    <div class="card-header">
+                        <span class="card-date">6 июня</span>
+                        <span class="category cat-state">🇷🇺 Государственный</span>
+                    </div>
+                    <div class="card-title">День русского языка / Пушкинский день</div>
+                    <div class="card-ideas">Пушкин, литература, язык, поэзия</div>
+                </div>
+                
+                <div class="holiday-card state">
+                    <div class="card-header">
+                        <span class="card-date">12 июня</span>
+                        <span class="category cat-state">🇷🇺 Государственный</span>
+                    </div>
+                    <div class="card-title">День России</div>
+                    <div class="card-ideas">Патриотизм, флаг, гимн, единство</div>
+                </div>
+                
+                <div class="holiday-card state">
+                    <div class="card-header">
+                        <span class="card-date">22 июня</span>
+                        <span class="category cat-state">🇷🇺 Государственный</span>
+                    </div>
+                    <div class="card-title">День памяти и скорби</div>
+                    <div class="card-ideas">Начало ВОВ, память о павших, свечи</div>
+                </div>
+                
+                <div class="holiday-card common">
+                    <div class="card-header">
+                        <span class="card-date">27 июня</span>
+                        <span class="category cat-common">🎉 Общий</span>
+                    </div>
+                    <div class="card-title">День молодёжи России</div>
+                    <div class="card-ideas">Молодёжь, энергия, будущее</div>
+                </div>
+            </div>
+            
+            <!-- ИЮЛЬ -->
+            <div class="month-section">
+                <div class="month-header">
+                    <h2>🗓️ ИЮЛЬ</h2>
+                </div>
+                
+                <div class="holiday-card folk">
+                    <div class="card-header">
+                        <span class="card-date">7 июля</span>
+                        <span class="category cat-folk">🌾 Народный</span>
+                    </div>
+                    <div class="card-title">День Ивана Купалы</div>
+                    <div class="card-ideas">Славянские традиции, венки, костры</div>
+                </div>
+                
+                <div class="holiday-card family">
+                    <div class="card-header">
+                        <span class="card-date">8 июля</span>
+                        <span class="category cat-family">👨‍👩‍👧‍👦 Семейный</span>
+                    </div>
+                    <div class="card-title">День семьи, любви и верности</div>
+                    <div class="card-ideas">Пётр и Феврония, ромашки, семейные фото</div>
+                </div>
+                
+                <div class="holiday-card religious">
+                    <div class="card-header">
+                        <span class="card-date">28 июля</span>
+                        <span class="category cat-religious">⛪ Религиозный</span>
+                    </div>
+                    <div class="card-title">День крещения Руси</div>
+                    <div class="card-ideas">История, православие, культура</div>
+                </div>
+            </div>
+            
+            <!-- АВГУСТ -->
+            <div class="month-section">
+                <div class="month-header">
+                    <h2>🗓️ АВГУСТ</h2>
+                </div>
+                
+                <div class="holiday-card prof">
+                    <div class="card-header">
+                        <span class="card-date">2 августа</span>
+                        <span class="category cat-prof">👨‍💼 Профессиональный</span>
+                    </div>
+                    <div class="card-title">День воздушно-десантных войск (ВДВ)</div>
+                    <div class="card-ideas">Десантники, голубые береты, служба</div>
+                </div>
+                
+                <div class="holiday-card folk">
+                    <div class="card-header">
+                        <span class="card-date">14 августа</span>
+                        <span class="category cat-folk">🌾 Народный</span>
+                    </div>
+                    <div class="card-title">Медовый Спас</div>
+                    <div class="card-ideas">Мёд, традиции, урожай</div>
+                </div>
+                
+                <div class="holiday-card folk">
+                    <div class="card-header">
+                        <span class="card-date">19 августа</span>
+                        <span class="category cat-folk">🌾 Народный</span>
+                    </div>
+                    <div class="card-title">Яблочный Спас (Преображение)</div>
+                    <div class="card-ideas">Яблоки, урожай, освящение плодов</div>
+                </div>
+                
+                <div class="holiday-card state">
+                    <div class="card-header">
+                        <span class="card-date">22 августа</span>
+                        <span class="category cat-state">🇷🇺 Государственный</span>
+                    </div>
+                    <div class="card-title">День Государственного флага РФ</div>
+                    <div class="card-ideas">Флаг, триколор, патриотизм</div>
+                </div>
+                
+                <div class="holiday-card prof">
+                    <div class="card-header">
+                        <span class="card-date">27 августа</span>
+                        <span class="category cat-prof">👨‍💼 Профессиональный</span>
+                    </div>
+                    <div class="card-title">День российского кино</div>
+                    <div class="card-ideas">Кино, фильмы, киноиндустрия</div>
+                </div>
+                
+                <div class="holiday-card folk">
+                    <div class="card-header">
+                        <span class="card-date">29 августа</span>
+                        <span class="category cat-folk">🌾 Народный</span>
+                    </div>
+                    <div class="card-title">Ореховый / Хлебный Спас</div>
+                    <div class="card-ideas">Орехи, хлеб, урожай</div>
+                </div>
+            </div>
+            
+            <!-- СЕНТЯБРЬ -->
+            <div class="month-section">
+                <div class="month-header">
+                    <h2>🗓️ СЕНТЯБРЬ</h2>
+                </div>
+                
+                <div class="holiday-card common">
+                    <div class="card-header">
+                        <span class="card-date">1 сентября</span>
+                        <span class="category cat-common">🎉 Общий</span>
+                    </div>
+                    <div class="card-title">День знаний</div>
+                    <div class="card-ideas">Школа, учёба, первоклассники, линейка</div>
+                </div>
+                
+                <div class="holiday-card state">
+                    <div class="card-header">
+                        <span class="card-date">3 сентября</span>
+                        <span class="category cat-state">🇷🇺 Государственный</span>
+                    </div>
+                    <div class="card-title">День солидарности в борьбе с терроризмом</div>
+                    <div class="card-ideas">Память о Беслане, мир, единство</div>
+                </div>
+                
+                <div class="holiday-card common">
+                    <div class="card-header">
+                        <span class="card-date">8 сентября</span>
+                        <span class="category cat-common">🎉 Общий</span>
+                    </div>
+                    <div class="card-title">Международный день грамотности</div>
+                    <div class="card-ideas">Образование, язык, грамотность</div>
+                </div>
+                
+                <div class="holiday-card religious">
+                    <div class="card-header">
+                        <span class="card-date">21 сентября</span>
+                        <span class="category cat-religious">⛪ Религиозный</span>
+                    </div>
+                    <div class="card-title">Рождество Пресвятой Богородицы</div>
+                    <div class="card-ideas">Религиозные традиции</div>
+                </div>
+                
+                <div class="holiday-card prof">
+                    <div class="card-header">
+                        <span class="card-date">27 сентября</span>
+                        <span class="category cat-prof">👨‍💼 Профессиональный</span>
+                    </div>
+                    <div class="card-title">День воспитателя и дошкольного работника</div>
+                    <div class="card-ideas">Детские сады, воспитатели</div>
+                </div>
+            </div>
+            
+            <!-- ОКТЯБРЬ -->
+            <div class="month-section">
+                <div class="month-header">
+                    <h2>🗓️ ОКТЯБРЬ</h2>
+                </div>
+                
+                <div class="holiday-card family">
+                    <div class="card-header">
+                        <span class="card-date">1 октября</span>
+                        <span class="category cat-family">👨‍👩‍👧‍👦 Семейный</span>
+                    </div>
+                    <div class="card-title">День пожилых людей</div>
+                    <div class="card-ideas">Старшее поколение, уважение, забота</div>
+                </div>
+                
+                <div class="holiday-card common">
+                    <div class="card-header">
+                        <span class="card-date">1 октября</span>
+                        <span class="category cat-common">🎉 Общий</span>
+                    </div>
+                    <div class="card-title">Международный день музыки</div>
+                    <div class="card-ideas">Музыка, концерты, творчество</div>
+                </div>
+                
+                <div class="holiday-card prof">
+                    <div class="card-header">
+                        <span class="card-date">5 октября</span>
+                        <span class="category cat-prof">👨‍💼 Профессиональный</span>
+                    </div>
+                    <div class="card-title">День учителя</div>
+                    <div class="card-ideas">Педагоги, школа, образование, поздравления</div>
+                </div>
+                
+                <div class="holiday-card religious">
+                    <div class="card-header">
+                        <span class="card-date">14 октября</span>
+                        <span class="category cat-religious">⛪ Религиозный</span>
+                    </div>
+                    <div class="card-title">Покров Пресвятой Богородицы</div>
+                    <div class="card-ideas">Православные традиции, осень</div>
+                </div>
+                
+                <div class="holiday-card prof">
+                    <div class="card-header">
+                        <span class="card-date">20 октября</span>
+                        <span class="category cat-prof">👨‍💼 Профессиональный</span>
+                    </div>
+                    <div class="card-title">День повара</div>
+                    <div class="card-ideas">Кулинария, рецепты, гастрономия</div>
+                </div>
+                
+                <div class="holiday-card state">
+                    <div class="card-header">
+                        <span class="card-date">30 октября</span>
+                        <span class="category cat-state">🇷🇺 Государственный</span>
+                    </div>
+                    <div class="card-title">День памяти жертв политических репрессий</div>
+                    <div class="card-ideas">Память, история, справедливость</div>
+                </div>
+            </div>
+            
+            <!-- НОЯБРЬ -->
+            <div class="month-section">
+                <div class="month-header">
+                    <h2>🗓️ НОЯБРЬ</h2>
+                </div>
+                
+                <div class="holiday-card state">
+                    <div class="card-header">
+                        <span class="card-date">4 ноября</span>
+                        <span class="category cat-state">🇷🇺 Государственный</span>
+                    </div>
+                    <div class="card-title">День народного единства</div>
+                    <div class="card-ideas">Патриотизм, единство, история</div>
+                </div>
+                
+                <div class="holiday-card prof">
+                    <div class="card-header">
+                        <span class="card-date">10 ноября</span>
+                        <span class="category cat-prof">👨‍💼 Профессиональный</span>
+                    </div>
+                    <div class="card-title">День полиции</div>
+                    <div class="card-ideas">Полиция, правопорядок, безопасность</div>
+                </div>
+                
+                <div class="holiday-card common">
+                    <div class="card-header">
+                        <span class="card-date">16 ноября</span>
+                        <span class="category cat-common">🎉 Общий</span>
+                    </div>
+                    <div class="card-title">Международный день толерантности</div>
+                    <div class="card-ideas">Толерантность, дружба народов</div>
+                </div>
+                
+                <div class="holiday-card family">
+                    <div class="card-header">
+                        <span class="card-date">20 ноября</span>
+                        <span class="category cat-family">👨‍👩‍👧‍👦 Семейный</span>
+                    </div>
+                    <div class="card-title">День ребёнка</div>
+                    <div class="card-ideas">Детство, права детей, семья</div>
+                </div>
+                
+                <div class="holiday-card prof">
+                    <div class="card-header">
+                        <span class="card-date">21 ноября</span>
+                        <span class="category cat-prof">👨‍💼 Профессиональный</span>
+                    </div>
+                    <div class="card-title">Всемирный день телевидения</div>
+                    <div class="card-ideas">ТВ, медиа, контент</div>
+                </div>
+                
+                <div class="holiday-card family">
+                    <div class="card-header">
+                        <span class="card-date">28 ноября</span>
+                        <span class="category cat-family">👨‍👩‍👧‍👦 Семейный</span>
+                    </div>
+                    <div class="card-title">День матери</div>
+                    <div class="card-ideas">Мамы, материнство, семья, тёплые поздравления</div>
+                </div>
+            </div>
+            
+            <!-- ДЕКАБРЬ -->
+            <div class="month-section">
+                <div class="month-header">
+                    <h2>🗓️ ДЕКАБРЬ</h2>
+                </div>
+                
+                <div class="holiday-card common">
+                    <div class="card-header">
+                        <span class="card-date">1 декабря</span>
+                        <span class="category cat-common">🎉 Общий</span>
+                    </div>
+                    <div class="card-title">Всемирный день борьбы со СПИДом</div>
+                    <div class="card-ideas">Здоровье, профилактика, осведомлённость</div>
+                </div>
+                
+                <div class="holiday-card state">
+                    <div class="card-header">
+                        <span class="card-date">3 декабря</span>
+                        <span class="category cat-state">🇷🇺 Государственный</span>
+                    </div>
+                    <div class="card-title">День неизвестного солдата</div>
+                    <div class="card-ideas">Память о павших, вечный огонь</div>
+                </div>
+                
+                <div class="holiday-card common">
+                    <div class="card-header">
+                        <span class="card-date">3 декабря</span>
+                        <span class="category cat-common">🎉 Общий</span>
+                    </div>
+                    <div class="card-title">Международный день инвалидов</div>
+                    <div class="card-ideas">Равные возможности, инклюзия</div>
+                </div>
+                
+                <div class="holiday-card prof">
+                    <div class="card-header">
+                        <span class="card-date">4 декабря</span>
+                        <span class="category cat-prof">👨‍💼 Профессиональный</span>
+                    </div>
+                    <div class="card-title">День информатики</div>
+                    <div class="card-ideas">IT, программирование, технологии</div>
+                </div>
+                
+                <div class="holiday-card common">
+                    <div class="card-header">
+                        <span class="card-date">5 декабря</span>
+                        <span class="category cat-common">🎉 Общий</span>
+                    </div>
+                    <div class="card-title">День добровольца (волонтёра)</div>
+                    <div class="card-ideas">Волонтёрство, добрые дела, помощь</div>
+                </div>
+                
+                <div class="holiday-card state">
+                    <div class="card-header">
+                        <span class="card-date">9 декабря</span>
+                        <span class="category cat-state">🇷🇺 Государственный</span>
+                    </div>
+                    <div class="card-title">День Героев Отечества</div>
+                    <div class="card-ideas">Герои, награды, подвиги</div>
+                </div>
+                
+                <div class="holiday-card state">
+                    <div class="card-header">
+                        <span class="card-date">12 декабря</span>
+                        <span class="category cat-state">🇷🇺 Государственный</span>
+                    </div>
+                    <div class="card-title">День Конституции РФ</div>
+                    <div class="card-ideas">Конституция, право, государство</div>
+                </div>
+                
+                <div class="holiday-card prof">
+                    <div class="card-header">
+                        <span class="card-date">22 декабря</span>
+                        <span class="category cat-prof">👨‍💼 Профессиональный</span>
+                    </div>
+                    <div class="card-title">День энергетика</div>
+                    <div class="card-ideas">Энергетика, свет, тепло</div>
+                </div>
+                
+                <div class="holiday-card prof">
+                    <div class="card-header">
+                        <span class="card-date">27 декабря</span>
+                        <span class="category cat-prof">👨‍💼 Профессиональный</span>
+                    </div>
+                    <div class="card-title">День спасателя</div>
+                    <div class="card-ideas">МЧС, спасатели, героизм</div>
+                </div>
+                
+                <div class="holiday-card common">
+                    <div class="card-header">
+                        <span class="card-date">31 декабря</span>
+                        <span class="category cat-common">🎉 Общий</span>
+                    </div>
+                    <div class="card-title">Новый год (канун)</div>
+                    <div class="card-ideas">Новогодняя ночь, бой курантов, шампанское, ёлка, подарки</div>
+                </div>
+            </div>
+            
+        </div>
+        
+        <div class="footer">
+            <p><strong>📅 Календарь праздников России 2025</strong></p>
+            <p>Создано для контент-планирования neurosphere.pro</p>
+            <p style="margin-top: 15px; opacity: 0.8;">Виктория Акгюн, CMO | Декабрь 2025</p>
+        </div>
+    </div>
+</body>
+</html>
