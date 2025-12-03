@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Календарь праздников России 2026 | neurosphere.pro</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 15px;
+            line-height: 1.6;
+            color: #212529;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #a7f3d0 0%, #6ee7b7 25%, #c4b5fd 75%, #ddd6fe 100%);
+            padding: 30px 20px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 8px;
+            color: #1a1a2e;
+        }
+        
+        .header p {
+            font-size: 16px;
+            color: #495057;
+        }
+        
+        .content {
+            padding: 20px;
+        }
+        
+        /* ИНТЕРАКТИВНЫЙ КАЛЕНДАРЬ */
+        .calendar-view {
+            background: linear-gradient(135deg, #fff7ed 0%, #fed7aa 100%);
+            padding: 25px;
+            border-radius: 16px;
+            margin-bottom: 30px;
+        }
+        
+        .calendar-view h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #1a1a2e;
+            text-align: center;
+        }
+        
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+        
+        .month-mini {
+            background: white;
+            border-radius: 12px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        
+        .month-mini:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+        
+        .month-mini-header {
+            font-size: 16px;
+            font-weight: 700;
+            color: #1a1a2e;
+            margin-bottom: 10px;
+            text-align: center;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #6ee7b7;
+        }
+        
+        .month-mini-days {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 4px;
+            font-size: 11px;
+        }
+        
+        .day-label {
+            text-align: center;
+            font-weight: 600;
+            color: #6c757d;
+            padding: 2px;
+        }
+        
+        .day-cell {
+            text-align: center;
+            padding: 4px 2px;
+            border-radius: 4px;
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .day-cell:hover {
+            background: #f8f9fa;
+        }
+        
+        .day-cell.holiday {
+            background: linear-gradient(135deg, #fecaca 0%, #fca5a5 100%);
+            font-weight: 700;
+            color: #7f1d1d;
+        }
+        
+        .day-cell.prof-holiday {
+            background: linear-gradient(135deg, #bfdbfe 0%, #93c5fd 100%);
+            font-weight: 700;
+            color: #1e3a8a;
+        }
+        
+        .day-cell.common-holiday {
+            background: linear-gradient(135deg, #fde68a 0%, #fcd34d 100%);
+            font-weight: 700;
+            color: #78350f;
+        }
+        
+        .day-cell.religious-holiday {
+            background: linear-gradient(135deg, #ddd6fe 0%, #c4b5fd 100%);
+            font-weight: 700;
+            color: #5b21b6;
+        }
+        
+        .day-cell.folk-holiday {
+            background: linear-gradient(135deg, #a7f3d0 0%, #6ee7b7 100%);
+            font-weight: 700;
+            color: #064e3b;
+        }
+        
+        .day-cell.muslim-holiday {
+            background: linear-gradient(135deg, #a7f3d0 0%, #10b981 100%);
+            font-weight: 700;
+            color: #064e3b;
+        }
+        
+        .day-cell.weekend {
+            color: #dc2626;
+        }
+        
+        .day-cell.empty {
+            visibility: hidden;
+        }
+        
+        /* ЛЕГЕНДА */
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            margin-bottom: 25px;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .category {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        
+        .cat-state {
+            background: linear-gradient(135deg, #fecaca 0%, #fca5a5 100%);
+            color: #7f1d1d;
+        }
+        
+        .cat-prof {
+            background: linear-gradient(135deg, #bfdbfe 0%, #93c5fd 100%);
+            color: #1e3a8a;
+        }
+        
+        .cat-common {
+            background: linear-gradient(135deg, #fde68a 0%, #fcd34d 100%);
+            color: #78350f;
+        }
+        
+        .cat-religious {
+            background: linear-gradient(135deg, #ddd6fe 0%, #c4b5fd 100%);
+            color: #5b21b6;
+        }
+        
+        .cat-folk {
+            background: linear-gradient(135deg, #a7f3d0 0%, #6ee7b7 100%);
+            color: #064e3b;
+        }
+        
+        .cat-family {
+            background: linear-gradient(135deg, #fecdd3 0%, #fda4af 100%);
+            color: #881337;
+        }
+        
+        .cat-muslim {
+            background: linear-gradient(135deg, #a7f3d0 0%, #10b981 100%);
+            color: #064e3b;
+        }
+        
+        /* СТАТИСТИКА */
+        .stats-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+        }
+        
+        .stats-section h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: #1a1a2e;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 15px;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 20px 15px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .stat-number {
+            font-size: 32px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #6ee7b7 0%, #c4b5fd 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .stat-label {
+            font-size: 13px;
+            color: #6c757d;
+            margin-top: 5px;
+        }
+        
+        /* ТОП ПРАЗДНИКОВ */
+        .top-holidays {
+            background: linear-gradient(135deg, #fff7ed 0%, #fed7aa 100%);
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+        }
+        
+        .top-holidays h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: #1a1a2e;
+        }
+        
+        .holiday-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background: white;
+            border-radius: 8px;
+            margin-bottom: 8px;
+        }
+        
+        .holiday-rank {
+            font-size: 20px;
+            font-weight: 700;
+            min-width: 35px;
+        }
+        
+        .holiday-info {
+            flex: 1;
+        }
+        
+        .holiday-name {
+            font-weight: 600;
+            font-size: 14px;
+            color: #1a1a2e;
+        }
+        
+        .holiday-date {
+            font-size: 12px;
+            color: #6c757d;
+        }
+        
+        .engagement {
+            font-size: 16px;
+        }
+        
+        /* МЕСЯЦЫ */
+        .month-section {
+            margin-bottom: 35px;
+            scroll-margin-top: 70px;
+        }
+        
+        .month-header {
+            background: linear-gradient(135deg, #6ee7b7 0%, #c4b5fd 100%);
+            padding: 15px 20px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        
+        .month-header h2 {
+            font-size: 24px;
+            color: #1a1a2e;
+        }
+        
+        .holiday-card {
+            background: white;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+        }
+        
+        .holiday-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .holiday-card.state { border-left-color: #f87171; }
+        .holiday-card.prof { border-left-color: #60a5fa; }
+        .holiday-card.common { border-left-color: #fbbf24; }
+        .holiday-card.religious { border-left-color: #a78bfa; }
+        .holiday-card.folk { border-left-color: #34d399; }
+        .holiday-card.family { border-left-color: #fb7185; }
+        .holiday-card.muslim { border-left-color: #10b981; }
+        
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .card-date {
+            font-weight: 700;
+            color: #1a1a2e;
+            font-size: 14px;
+        }
+        
+        .card-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #212529;
+            margin-bottom: 8px;
+        }
+        
+        .card-ideas {
+            font-size: 13px;
+            color: #6c757d;
+            font-style: italic;
+            line-height: 1.5;
+        }
+        
+        .footer {
+            background: #1a1a2e;
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+        
+        .footer p {
+            margin: 8px 0;
+            font-size: 14px;
+        }
+        
+        /* МОБИЛЬНАЯ АДАПТАЦИЯ */
+        @media (max-width: 768px) {
+            .calendar-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+            
+            .month-mini {
+                padding: 10px;
+            }
+            
+            .month-mini-header {
+                font-size: 14px;
+            }
+            
+            .day-cell {
+                font-size: 10px;
+                padding: 3px 1px;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .calendar-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📅 Календарь праздников России 2026</h1>
+            <p>Полный справочник для контент-планирования neurosphere.pro</p>
+        </div>
+        
+        <div class="content">
+            <!-- ИНТЕРАКТИВНЫЙ КАЛЕНДАРЬ -->
+            <div class="calendar-view">
+                <h2>🗓️ Календарный вид 2026 года</h2>
+                <p style="text-align: center; color: #6c757d; margin-bottom: 20px; font-size: 14px;">
+                    Нажмите на месяц, чтобы перейти к подробному описанию праздников
+                </p>
+                
+                <div class="calendar-grid" id="calendarGrid"></div>
+            </div>
+            
+            <!-- Легенда -->
+            <div class="legend">
+                <div class="legend-item">
+                    <span class="category cat-state">🇷🇺 Государственные</span>
+                </div>
+                <div class="legend-item">
+                    <span class="category cat-prof">👨‍💼 Профессиональные</span>
+                </div>
+                <div class="legend-item">
+                    <span class="category cat-common">🎉 Общие</span>
+                </div>
+                <div class="legend-item">
+                    <span class="category cat-religious">⛪ Религиозные</span>
+                </div>
+                <div class="legend-item">
+                    <span class="category cat-folk">🌾 Народные</span>
+                </div>
+                <div class="legend-item">
+                    <span class="category cat-family">👨‍👩‍👧‍👦 Семейные</span>
+                </div>
+                <div class="legend-item">
+                    <span class="category cat-muslim">☪️ Мусульманские</span>
+                </div>
+            </div>
+            
+            <!-- Статистика -->
+            <div class="stats-section">
+                <h3>📊 Статистика по категориям</h3>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">25</div>
+                        <div class="stat-label">Государственных</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">20</div>
+                        <div class="stat-label">Общих</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">18</div>
+                        <div class="stat-label">Профессиональных</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">10</div>
+                        <div class="stat-label">Семейных</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">9</div>
+                        <div class="stat-label">Религиозных</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">8</div>
+                        <div class="stat-label">Народных</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">3</div>
+                        <div class="stat-label">Мусульманских</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- ТОП-10 праздников -->
+            <div class="top-holidays">
+                <h3>🔥 ТОП-10 главных праздников для контента</h3>
+                
+                <div class="holiday-item">
+                    <div class="holiday-rank">1️⃣</div>
+                    <div class="holiday-info">
+                        <div class="holiday-name">Новый год</div>
+                        <div class="holiday-date">31 декабря 2025 / 1 января 2026</div>
+                    </div>
+                    <div class="engagement">🔥🔥🔥🔥🔥</div>
+                </div>
+                
+                <div class="holiday-item">
+                    <div class="holiday-rank">2️⃣</div>
+                    <div class="holiday-info">
+                        <div class="holiday-name">День Победы</div>
+                        <div class="holiday-date">9 мая (суббота)</div>
+                    </div>
+                    <div class="engagement">🔥🔥🔥🔥🔥</div>
+                </div>
+                
+                <div class="holiday-item">
+                    <div class="holiday-rank">3️⃣</div>
+                    <div class="holiday-info">
+                        <div class="holiday-name">Международный женский день</div>
+                        <div class="holiday-date">8 марта (воскресенье)</div>
+                    </div>
+                    <div class="engagement">🔥🔥🔥🔥🔥</div>
+                </div>
+                
+                <div class="holiday-item">
+                    <div class="holiday-rank">4️⃣</div>
+                    <div class="holiday-info">
+                        <div class="holiday-name">День защитника Отечества</div>
+                        <div class="holiday-date">23 февраля (понедельник)</div>
+                    </div>
+                    <div class="engagement">🔥🔥🔥🔥</div>
+                </div>
+                
+                <div class="holiday-item">
+                    <div class="holiday-rank">5️⃣</div>
+                    <div class="holiday-info">
+                        <div class="holiday-name">День знаний</div>
+                        <div class="holiday-date">1 сентября (вторник)</div>
+                    </div>
+                    <div class="engagement">🔥🔥🔥🔥</div>
+                </div>
+                
+                <div class="holiday-item">
+                    <div class="holiday-rank">6️⃣</div>
+                    <div class="holiday-info">
+                        <div class="holiday-name">День святого Валентина</div>
+                        <div class="holiday-date">14 февраля (суббота)</div>
+                    </div>
+                    <div class="engagement">🔥🔥🔥</div>
+                </div>
+                
+                <div class="holiday-item">
+                    <div class="holiday-rank">7️⃣</div>
+                    <div class="holiday-info">
+                        <div class="holiday-name">День России</div>
+                        <div class="holiday-date">12 июня (пятница)</div>
+                    </div>
+                    <div class="engagement">🔥🔥🔥🔥</div>
+                </div>
+                
+                <div class="holiday-item">
+                    <div class="holiday-rank">8️⃣</div>
+                    <div class="holiday-info">
+                        <div class="holiday-name">День учителя</div>
+                        <div class="holiday-date">5 октября (понедельник)</div>
+                    </div>
+                    <div class="engagement">🔥🔥🔥</div>
+                </div>
+                
+                <div class="holiday-item">
+                    <div class="holiday-rank">9️⃣</div>
+                    <div class="holiday-info">
+                        <div class="holiday-name">Рождество</div>
+                        <div class="holiday-date">7 января (среда)</div>
+                    </div>
+                    <div class="engagement">🔥🔥🔥</div>
+                </div>
+                
+                <div class="holiday-item">
+                    <div class="holiday-rank">🔟</div>
+                    <div class="holiday-info">
+                        <div class="holiday-name">День матери</div>
+                        <div class="holiday-date">29 ноября (воскресенье)</div>
+                    </div>
+                    <div class="engagement">🔥🔥🔥</div>
+                </div>
+            </div>
+            
+            <!-- Подробный календарь по месяцам... будет сгенерирован JavaScript -->
+            <div id="detailedCalendar"></div>
+            
+        </div>
+        
+        <div class="footer">
+            <p><strong>📅 Календарь праздников России 2026</strong></p>
+            <p>Создано для контент-планирования neurosphere.pro</p>
+            <p style="margin-top: 15px; opacity: 0.8;">Виктория Акгюн, CMO | Декабрь 2025</p>
+        </div>
+    </div>
+
+    <script>
+        // Данные праздников на 2026 год
+        const holidays2026 = {
+            0: { // Январь
+                1: {type: 'common', name: 'Новый год'},
+                7: {type: 'religious', name: 'Рождество Христово'},
+                13: {type: 'folk', name: 'Старый Новый год'},
+                19: {type: 'religious', name: 'Крещение'},
+                25: {type: 'prof', name: 'День студента'},
+                27: {type: 'state', name: 'День снятия блокады Ленинграда'}
+            },
+            1: { // Февраль
+                8: {type: 'state', name: 'День российской науки'},
+                14: {type: 'common', name: 'День святого Валентина'},
+                18: {type: 'muslim', name: 'Начало Рамадана'},
+                23: {type: 'state', name: 'День защитника Отечества'}
+            },
+            2: { // Март
+                8: {type: 'common', name: '8 марта'},
+                18: {type: 'state', name: 'День воссоединения Крыма'},
+                20: {type: 'muslim', name: 'Ураза-байрам'},
+                21: {type: 'common', name: 'День поэзии'},
+                27: {type: 'common', name: 'День театра'}
+            },
+            3: { // Апрель
+                1: {type: 'common', name: 'День смеха'},
+                7: {type: 'common', name: 'День здоровья'},
+                12: {type: 'state', name: 'День космонавтики'},
+                19: {type: 'religious', name: 'Пасха'}
+            },
+            4: { // Май
+                1: {type: 'state', name: 'Праздник Весны и Труда'},
+                9: {type: 'state', name: 'День Победы'},
+                15: {type: 'family', name: 'День семьи'},
+                24: {type: 'state', name: 'День славянской письменности'},
+                27: {type: 'muslim', name: 'Курбан-байрам'}
+            },
+            5: { // Июнь
+                1: {type: 'family', name: 'День защиты детей'},
+                6: {type: 'state', name: 'Пушкинский день'},
+                12: {type: 'state', name: 'День России'},
+                22: {type: 'state', name: 'День памяти и скорби'}
+            },
+            6: { // Июль
+                7: {type: 'folk', name: 'Иван Купала'},
+                8: {type: 'family', name: 'День семьи, любви и верности'}
+            },
+            7: { // Август
+                2: {type: 'prof', name: 'День ВДВ'},
+                14: {type: 'folk', name: 'Медовый Спас'},
+                19: {type: 'folk', name: 'Яблочный Спас'},
+                22: {type: 'state', name: 'День флага РФ'},
+                27: {type: 'prof', name: 'День кино'}
+            },
+            8: { // Сентябрь
+                1: {type: 'common', name: 'День знаний'},
+                3: {type: 'state', name: 'День борьбы с терроризмом'},
+                27: {type: 'prof', name: 'День воспитателя'}
+            },
+            9: { // Октябрь
+                1: {type: 'family', name: 'День пожилых людей'},
+                5: {type: 'prof', name: 'День учителя'},
+                20: {type: 'prof', name: 'День повара'}
+            },
+            10: { // Ноябрь
+                4: {type: 'state', name: 'День народного единства'},
+                10: {type: 'prof', name: 'День полиции'},
+                29: {type: 'family', name: 'День матери'}
+            },
+            11: { // Декабрь
+                3: {type: 'state', name: 'День неизвестного солдата'},
+                9: {type: 'state', name: 'День Героев Отечества'},
+                12: {type: 'state', name: 'День Конституции'},
+                27: {type: 'prof', name: 'День спасателя'},
+                31: {type: 'common', name: 'Новый год'}
+            }
+        };
+
+        const monthNames = [
+            'Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь',
+            'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'
+        ];
+
+        const dayLabels = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'];
+
+        function getDaysInMonth(month, year) {
+            return new Date(year, month + 1, 0).getDate();
+        }
+
+        function getFirstDayOfMonth(month, year) {
+            let day = new Date(year, month, 1).getDay();
+            return day === 0 ? 6 : day - 1; // Преобразуем в формат Пн-Вс (0-6)
+        }
+
+        function isWeekend(date, month, year) {
+            const d = new Date(year, month, date).getDay();
+            return d === 0 || d === 6;
+        }
+
+        function createMonthMini(monthIndex) {
+            const year = 2026;
+            const daysInMonth = getDaysInMonth(monthIndex, year);
+            const firstDay = getFirstDayOfMonth(monthIndex, year);
+            
+            const monthDiv = document.createElement('div');
+            monthDiv.className = 'month-mini';
+            monthDiv.onclick = () => {
+                document.getElementById('month-' + monthIndex).scrollIntoView({ behavior: 'smooth' });
+            };
+            
+            const header = document.createElement('div');
+            header.className = 'month-mini-header';
+            header.textContent = monthNames[monthIndex];
+            monthDiv.appendChild(header);
+            
+            const daysGrid = document.createElement('div');
+            daysGrid.className = 'month-mini-days';
+            
+            // День недели labels
+            dayLabels.forEach(label => {
+                const dayLabel = document.createElement('div');
+                dayLabel.className = 'day-label';
+                dayLabel.textContent = label;
+                daysGrid.appendChild(dayLabel);
+            });
+            
+            // Пустые ячейки перед первым днем
+            for (let i = 0; i < firstDay; i++) {
+                const emptyCell = document.createElement('div');
+                emptyCell.className = 'day-cell empty';
+                daysGrid.appendChild(emptyCell);
+            }
+            
+            // Дни месяца
+            for (let day = 1; day <= daysInMonth; day++) {
+                const dayCell = document.createElement('div');
+                dayCell.className = 'day-cell';
+                dayCell.textContent = day;
+                
+                if (isWeekend(day, monthIndex, year)) {
+                    dayCell.classList.add('weekend');
+                }
+                
+                if (holidays2026[monthIndex] && holidays2026[monthIndex][day]) {
+                    const holiday = holidays2026[monthIndex][day];
+                    dayCell.classList.add(holiday.type + '-holiday');
+                    dayCell.title = holiday.name;
+                }
+                
+                daysGrid.appendChild(dayCell);
+            }
+            
+            monthDiv.appendChild(daysGrid);
+            return monthDiv;
+        }
+
+        // Генерация календаря
+        const calendarGrid = document.getElementById('calendarGrid');
+        for (let i = 0; i < 12; i++) {
+            calendarGrid.appendChild(createMonthMini(i));
+        }
+
+        // Подробные данные праздников
+        const detailedHolidays = [
+            // ЯНВАРЬ
+            {month: 0, id: 'month-0', holidays: [
+                {date: '1 января', type: 'common', name: 'Новый год', desc: 'Главный праздник года, поздравления, итоги, планы'},
+                {date: '7 января', type: 'religious', name: 'Рождество Христово', desc: 'Рождественские традиции, семейные ценности'},
+                {date: '13 января', type: 'folk', name: 'Старый Новый год', desc: 'Вторая волна поздравлений, народные приметы'},
+                {date: '19 января', type: 'religious', name: 'Крещение Господне', desc: 'Крещенские традиции, купание в проруби'},
+                {date: '25 января', type: 'prof', name: 'День студента', desc: 'Поздравления студентов, Татьянин день'},
+                {date: '27 января', type: 'state', name: 'День снятия блокады Ленинграда', desc: 'Память, история, подвиг'}
+            ]},
+            
+            // ФЕВРАЛЬ
+            {month: 1, id: 'month-1', holidays: [
+                {date: '8 февраля', type: 'state', name: 'День российской науки', desc: 'Научные достижения, AI и технологии'},
+                {date: '14 февраля', type: 'common', name: 'День святого Валентина', desc: 'Романтика, любовь, генераторы валентинок'},
+                {date: '18 февраля', type: 'muslim', name: 'Начало Рамадана', desc: 'Священный месяц поста для мусульман (до 19 марта)'},
+                {date: '23 февраля', type: 'state', name: 'День защитника Отечества', desc: 'Поздравления мужчин, армия, мужество'}
+            ]},
+            
+            // МАРТ
+            {month: 2, id: 'month-2', holidays: [
+                {date: '8 марта', type: 'common', name: 'Международный женский день', desc: 'Поздравления женщин, весна, генераторы открыток'},
+                {date: '18 марта', type: 'state', name: 'День воссоединения Крыма с Россией', desc: 'Патриотизм, история'},
+                {date: '20 марта', type: 'muslim', name: 'Ураза-байрам (Ид аль-Фитр)', desc: 'Праздник разговения, окончание Рамадана. Выходной в Татарстане, Башкирии, Чечне, Дагестане'},
+                {date: '21 марта', type: 'common', name: 'Всемирный день поэзии', desc: 'Стихи, литература, генераторы поэзии'},
+                {date: '27 марта', type: 'common', name: 'Всемирный день театра', desc: 'Театр, культура, искусство'}
+            ]},
+            
+            // АПРЕЛЬ
+            {month: 3, id: 'month-3', holidays: [
+                {date: '1 апреля', type: 'common', name: 'День смеха', desc: 'Юмор, шутки, розыгрыши, веселый контент'},
+                {date: '7 апреля', type: 'common', name: 'Всемирный день здоровья', desc: 'ЗОЖ, спорт, здоровое питание'},
+                {date: '12 апреля', type: 'state', name: 'День космонавтики', desc: 'Космос, Гагарин, наука'},
+                {date: '19 апреля', type: 'religious', name: 'Пасха', desc: 'Куличи, яйца, пасхальные традиции'}
+            ]},
+            
+            // МАЙ
+            {month: 4, id: 'month-4', holidays: [
+                {date: '1 мая', type: 'state', name: 'Праздник Весны и Труда', desc: 'Труд, весна, майские праздники'},
+                {date: '9 мая', type: 'state', name: 'День Победы', desc: 'ВОВ, ветераны, память, георгиевская лента'},
+                {date: '15 мая', type: 'family', name: 'Международный день семьи', desc: 'Семейные ценности, традиции'},
+                {date: '24 мая', type: 'state', name: 'День славянской письменности и культуры', desc: 'Кирилл и Мефодий, язык'},
+                {date: '27 мая', type: 'muslim', name: 'Курбан-байрам (Ид аль-Адха)', desc: 'Праздник жертвоприношения, завершение хаджа. Отмечается 3 дня (27-30 мая). Выходной в Татарстане, Башкирии, Чечне, Дагестане'}
+            ]},
+            
+            // ИЮНЬ
+            {month: 5, id: 'month-5', holidays: [
+                {date: '1 июня', type: 'family', name: 'День защиты детей', desc: 'Дети, семья, детство, радость'},
+                {date: '6 июня', type: 'state', name: 'День русского языка / Пушкинский день', desc: 'Пушкин, литература, язык'},
+                {date: '12 июня', type: 'state', name: 'День России', desc: 'Патриотизм, флаг, гимн'},
+                {date: '22 июня', type: 'state', name: 'День памяти и скорби', desc: 'Начало ВОВ, память о павших'}
+            ]},
+            
+            // ИЮЛЬ
+            {month: 6, id: 'month-6', holidays: [
+                {date: '7 июля', type: 'folk', name: 'День Ивана Купалы', desc: 'Славянские традиции, венки'},
+                {date: '8 июля', type: 'family', name: 'День семьи, любви и верности', desc: 'Пётр и Феврония, ромашки'}
+            ]},
+            
+            // АВГУСТ
+            {month: 7, id: 'month-7', holidays: [
+                {date: '2 августа', type: 'prof', name: 'День ВДВ', desc: 'Десантники, голубые береты'},
+                {date: '14 августа', type: 'folk', name: 'Медовый Спас', desc: 'Мёд, традиции, урожай'},
+                {date: '19 августа', type: 'folk', name: 'Яблочный Спас', desc: 'Яблоки, урожай, Преображение'},
+                {date: '22 августа', type: 'state', name: 'День Государственного флага РФ', desc: 'Флаг, триколор, патриотизм'},
+                {date: '27 августа', type: 'prof', name: 'День российского кино', desc: 'Кино, фильмы'}
+            ]},
+            
+            // СЕНТЯБРЬ
+            {month: 8, id: 'month-8', holidays: [
+                {date: '1 сентября', type: 'common', name: 'День знаний', desc: 'Школа, учёба, первоклассники'},
+                {date: '3 сентября', type: 'state', name: 'День солидарности в борьбе с терроризмом', desc: 'Память о Беслане'},
+                {date: '27 сентября', type: 'prof', name: 'День воспитателя', desc: 'Детские сады, воспитатели'}
+            ]},
+            
+            // ОКТЯБРЬ
+            {month: 9, id: 'month-9', holidays: [
+                {date: '1 октября', type: 'family', name: 'День пожилых людей', desc: 'Старшее поколение, уважение'},
+                {date: '5 октября', type: 'prof', name: 'День учителя', desc: 'Педагоги, школа, образование'},
+                {date: '20 октября', type: 'prof', name: 'День повара', desc: 'Кулинария, рецепты'}
+            ]},
+            
+            // НОЯБРЬ
+            {month: 10, id: 'month-10', holidays: [
+                {date: '4 ноября', type: 'state', name: 'День народного единства', desc: 'Патриотизм, единство'},
+                {date: '10 ноября', type: 'prof', name: 'День полиции', desc: 'Полиция, правопорядок'},
+                {date: '29 ноября', type: 'family', name: 'День матери', desc: 'Мамы, материнство, семья'}
+            ]},
+            
+            // ДЕКАБРЬ
+            {month: 11, id: 'month-11', holidays: [
+                {date: '3 декабря', type: 'state', name: 'День неизвестного солдата', desc: 'Память о павших'},
+                {date: '9 декабря', type: 'state', name: 'День Героев Отечества', desc: 'Герои, награды, подвиги'},
+                {date: '12 декабря', type: 'state', name: 'День Конституции РФ', desc: 'Конституция, право'},
+                {date: '27 декабря', type: 'prof', name: 'День спасателя', desc: 'МЧС, спасатели, героизм'},
+                {date: '31 декабря', type: 'common', name: 'Новый год (канун)', desc: 'Новогодняя ночь, бой курантов'}
+            ]}
+        ];
+
+        // Генерация подробного календаря
+        const detailedCalendar = document.getElementById('detailedCalendar');
+        detailedHolidays.forEach(monthData => {
+            const section = document.createElement('div');
+            section.className = 'month-section';
+            section.id = monthData.id;
+            
+            const header = document.createElement('div');
+            header.className = 'month-header';
+            header.innerHTML = `<h2>🗓️ ${monthNames[monthData.month].toUpperCase()}</h2>`;
+            section.appendChild(header);
+            
+            monthData.holidays.forEach(holiday => {
+                const card = document.createElement('div');
+                card.className = `holiday-card ${holiday.type}`;
+                card.innerHTML = `
+                    <div class="card-header">
+                        <span class="card-date">${holiday.date}</span>
+                        <span class="category cat-${holiday.type}">${getIcon(holiday.type)} ${getLabel(holiday.type)}</span>
+                    </div>
+                    <div class="card-title">${holiday.name}</div>
+                    <div class="card-ideas">${holiday.desc}</div>
+                `;
+                section.appendChild(card);
+            });
+            
+            detailedCalendar.appendChild(section);
+        });
+
+        function getIcon(type) {
+            const icons = {
+                'state': '🇷🇺',
+                'prof': '👨‍💼',
+                'common': '🎉',
+                'religious': '⛪',
+                'folk': '🌾',
+                'family': '👨‍👩‍👧‍👦',
+                'muslim': '☪️'
+            };
+            return icons[type] || '📅';
+        }
+
+        function getLabel(type) {
+            const labels = {
+                'state': 'Государственный',
+                'prof': 'Профессиональный',
+                'common': 'Общий',
+                'religious': 'Религиозный',
+                'folk': 'Народный',
+                'family': 'Семейный',
+                'muslim': 'Мусульманский'
+            };
+            return labels[type] || 'Праздник';
+        }
+    </script>
+</body>
+</html>
