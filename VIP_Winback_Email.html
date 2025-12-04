@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вам снова доступен Premium - в подарок</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
+            padding: 20px;
+            line-height: 1.6;
+        }
+        
+        .email-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #7c3aed 0%, #c4b5fd 100%);
+            padding: 40px 30px;
+            text-align: center;
+            color: white;
+        }
+        
+        .header h1 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+        
+        .header .gift-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+        
+        .content {
+            padding: 40px 30px;
+        }
+        
+        .greeting {
+            font-size: 16px;
+            color: #1a1a2e;
+            margin-bottom: 20px;
+        }
+        
+        .intro {
+            font-size: 15px;
+            color: #4a5568;
+            margin-bottom: 25px;
+            line-height: 1.7;
+        }
+        
+        .brand {
+            font-weight: 700;
+            color: #7c3aed;
+        }
+        
+        .gift-box {
+            background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+            border-radius: 12px;
+            padding: 25px;
+            margin: 30px 0;
+            border-left: 4px solid #10b981;
+        }
+        
+        .gift-box h2 {
+            font-size: 20px;
+            color: #065f46;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        .gift-items {
+            display: grid;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .gift-item {
+            display: flex;
+            align-items: center;
+            font-size: 15px;
+            color: #065f46;
+        }
+        
+        .gift-item .icon {
+            font-size: 24px;
+            margin-right: 12px;
+        }
+        
+        .gift-item strong {
+            font-weight: 700;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: #10b981;
+            color: white;
+            text-decoration: none;
+            padding: 14px 28px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        }
+        
+        .cta-button:hover {
+            background: #059669;
+            box-shadow: 0 6px 16px rgba(16, 185, 129, 0.4);
+        }
+        
+        .features {
+            margin: 30px 0;
+        }
+        
+        .features h3 {
+            font-size: 18px;
+            color: #1a1a2e;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        .features-list {
+            display: grid;
+            gap: 12px;
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            font-size: 14px;
+            color: #4a5568;
+        }
+        
+        .feature-item .bullet {
+            color: #7c3aed;
+            font-weight: 700;
+            margin-right: 8px;
+            font-size: 16px;
+        }
+        
+        .invitation {
+            background: #f9fafb;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 30px 0;
+            border-left: 4px solid #7c3aed;
+        }
+        
+        .invitation p {
+            font-size: 15px;
+            color: #1a1a2e;
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+        
+        .invitation strong {
+            color: #7c3aed;
+            font-weight: 700;
+        }
+        
+        .footer {
+            background: #1a1a2e;
+            padding: 30px;
+            text-align: center;
+            color: white;
+        }
+        
+        .signature {
+            margin-bottom: 20px;
+        }
+        
+        .signature .name {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .signature .title {
+            font-size: 14px;
+            color: #c4b5fd;
+        }
+        
+        .footer-links {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .footer-links a {
+            color: #c4b5fd;
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 14px;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            
+            .header {
+                padding: 30px 20px;
+            }
+            
+            .header h1 {
+                font-size: 20px;
+            }
+            
+            .content {
+                padding: 30px 20px;
+            }
+            
+            .gift-box, .invitation {
+                padding: 20px;
+            }
+            
+            .footer {
+                padding: 25px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        
+        <!-- Header -->
+        <div class="header">
+            <div class="gift-icon">🎁</div>
+            <h1>Миллион миллион миллион<br>токенов слов</h1>
+            <div style="font-size: 28px; font-weight: 700; margin-top: 15px; line-height: 1.3;">
+                и 1 000 медиа-токенов<br>в подарок Вам как нашему VIP-креатору
+            </div>
+        </div>
+        
+        <!-- Content -->
+        <div class="content">
+            
+            <p class="greeting"><strong>Здравствуйте!</strong></p>
+            
+            <p class="intro">
+                Меня зовут Тимур, я основатель <span class="brand">neurosphere.pro</span><br><br>
+                Вы были частью нашей платформы, и для нас это по-настоящему ценно. Но вы больше не заходите к нам, и я хотел бы лично сказать Вам, что мы скучаем.<br><br>
+                В знак благодарности и как приглашение вернуться мы дарим вам 1 млн токенов слов и 1000 медиа-токенов. Токены можно активировать в один клик — просто зайдите в приоритетный чат поддержки, который мы создали специально для Вас.
+            </p>
+            
+            <!-- Gift Box -->
+            <div class="gift-box">
+                <h2>🎉 Ваш подарок:</h2>
+                
+                <div class="gift-items">
+                    <div class="gift-item">
+                        <span class="icon">💬</span>
+                        <span><strong>1 млн токенов</strong> слов</span>
+                    </div>
+                    <div class="gift-item">
+                        <span class="icon">🎨</span>
+                        <span><strong>1000 медиа-токенов</strong></span>
+                    </div>
+                </div>
+                
+                <a href="#" class="cta-button">🔗 Открыть VIP-чат поддержки</a>
+            </div>
+            
+            <!-- Features -->
+            <div class="features">
+                <h3>🚀 За последнее время у нас появилось много нового:</h3>
+                
+                <div class="features-list">
+                    <div class="feature-item">
+                        <span class="bullet">•</span>
+                        <span><strong>Nano Banana Pro</strong> — создавайте ультра-реалистичные изображения</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="bullet">•</span>
+                        <span><strong>Черно-белая близость</strong> — в один клик создайте трогательный семейный снимок</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="bullet">•</span>
+                        <span><strong>Рекламный ролик</strong> — создавайте потрясающую видео-рекламу без усилий</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="bullet">•</span>
+                        <span>И конечно же — <strong>Поздравления!</strong> Подарите особые новогодние поздравления с любым героем</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Invitation -->
+            <div class="invitation">
+                <p>
+                    А также вы всегда можете написать мне лично — ваши идеи, предложения и пожелания к работе платформы, потому что <strong>вы не просто пользователь, вы — партнер в развитии neurosphere.pro</strong>
+                </p>
+            </div>
+            
+            <p style="text-align: center; font-size: 16px; color: #1a1a2e; font-weight: 600; margin-top: 30px;">
+                До встречи на <span class="brand">neurosphere.pro</span> ✨
+            </p>
+            
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer">
+            <div class="signature">
+                <div class="name">С благодарностью,<br>Тимур</div>
+                <div class="title">Founder & CEO Neurosphere</div>
+            </div>
+            
+            <div class="footer-links">
+                <a href="https://neurosphere.pro">neurosphere.pro</a>
+                <a href="#">Telegram</a>
+                <a href="#">Поддержка</a>
+            </div>
+        </div>
+        
+    </div>
+</body>
+</html>
