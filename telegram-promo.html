@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Супер-понедельник | neurosphere.pro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --emerald: #4ecdc4;
+            --emerald-dark: #2eb8af;
+            --gold: #ffd700;
+            --dark: #1a1a2e;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1a2e 50%, #16213e 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            position: relative;
+        }
+
+        /* Праздничные снежинки */
+        body::before,
+        body::after {
+            content: '❄';
+            position: fixed;
+            color: rgba(78, 205, 196, 0.3);
+            font-size: 2rem;
+            animation: snow 15s linear infinite;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        body::before {
+            top: -50px;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        body::after {
+            top: -50px;
+            right: 20%;
+            animation-delay: 7s;
+        }
+
+        @keyframes snow {
+            0% { transform: translateY(0) rotate(0deg); }
+            100% { transform: translateY(100vh) rotate(360deg); }
+        }
+
+        .container {
+            max-width: 700px;
+            width: 100%;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(248, 249, 250, 0.95) 100%);
+            border-radius: 30px;
+            padding: 50px;
+            box-shadow: 
+                0 30px 90px rgba(78, 205, 196, 0.3),
+                0 0 0 1px rgba(78, 205, 196, 0.1);
+            position: relative;
+            overflow: hidden;
+            animation: slideUp 0.8s ease-out;
+            z-index: 10;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Декоративные элементы */
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(78, 205, 196, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .container::after {
+            content: '🎁';
+            position: absolute;
+            bottom: 30px;
+            right: 30px;
+            font-size: 4rem;
+            opacity: 0.1;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, var(--emerald) 0%, var(--emerald-dark) 100%);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(78, 205, 196, 0.4);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 900;
+            color: var(--dark);
+            line-height: 1.2;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--dark) 0%, var(--emerald-dark) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .intro {
+            font-size: 1.15rem;
+            color: #555;
+            line-height: 1.7;
+            margin-bottom: 35px;
+        }
+
+        .gift-block {
+            background: linear-gradient(135deg, rgba(78, 205, 196, 0.08) 0%, rgba(78, 205, 196, 0.12) 100%);
+            border-left: 5px solid var(--emerald);
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 35px;
+            position: relative;
+        }
+
+        .gift-block::before {
+            content: '🎁';
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 2.5rem;
+            opacity: 0.3;
+        }
+
+        .gift-title {
+            font-weight: 700;
+            font-size: 1.3rem;
+            color: var(--emerald-dark);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .gift-text {
+            color: #444;
+            font-size: 1.05rem;
+            line-height: 1.6;
+        }
+
+        .features-title {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--dark);
+            margin-bottom: 20px;
+        }
+
+        .feature {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            border: 2px solid transparent;
+            min-height: 120px;
+            align-items: center;
+        }
+
+        .feature:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 20px rgba(78, 205, 196, 0.2);
+            border-color: var(--emerald);
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 80px;
+        }
+
+        .feature-content {
+            flex: 1;
+        }
+
+        .feature-title {
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 5px;
+            font-size: 1.05rem;
+        }
+
+        .feature-link {
+            color: var(--emerald-dark);
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .cta-block {
+            background: linear-gradient(135deg, var(--emerald) 0%, var(--emerald-dark) 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 20px;
+            margin-top: 35px;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(78, 205, 196, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-block::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            animation: rotate 10s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .cta-text {
+            font-size: 1.15rem;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+            line-height: 1.6;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: white;
+            color: var(--emerald-dark);
+            padding: 18px 45px;
+            border-radius: 50px;
+            font-weight: 800;
+            font-size: 1.1rem;
+            text-decoration: none;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .footer-text {
+            margin-top: 30px;
+            text-align: center;
+            color: #777;
+            font-size: 0.9rem;
+            font-style: italic;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .feature {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .cta-button {
+                padding: 15px 35px;
+                font-size: 1rem;
+            }
+        }
+
+        /* Дополнительные снежинки */
+        .snowflake {
+            position: fixed;
+            color: rgba(78, 205, 196, 0.2);
+            font-size: 1.5rem;
+            animation: snow 12s linear infinite;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .snowflake:nth-child(1) { left: 5%; animation-delay: 2s; }
+        .snowflake:nth-child(2) { left: 25%; animation-delay: 5s; }
+        .snowflake:nth-child(3) { left: 45%; animation-delay: 8s; }
+        .snowflake:nth-child(4) { left: 65%; animation-delay: 3s; }
+        .snowflake:nth-child(5) { left: 85%; animation-delay: 6s; }
+    </style>
+</head>
+<body>
+    <div class="snowflake">❄</div>
+    <div class="snowflake">❄</div>
+    <div class="snowflake">❄</div>
+    <div class="snowflake">❄</div>
+    <div class="snowflake">❄</div>
+
+    <div class="container">
+        <div class="badge">
+            ⏰ Только сегодня
+        </div>
+
+        <h1>Вы с нами уже давно — но всё ещё не пробовали продукт?</h1>
+        
+        <p class="intro">Сегодня — идеальный момент начать.</p>
+
+        <div class="gift-block">
+            <div class="gift-title">🎁 Только сегодня</div>
+            <div class="gift-text">
+                Оформите любую подписку и получите <strong>+20 медиа-токенов в подарок</strong>.
+            </div>
+        </div>
+
+        <p class="features-title">✨ А знаете, что можно сделать на эти 20 медиа-токенов?</p>
+
+        <a href="#" class="feature">
+            <div class="feature-icon">
+                <img src="data:image/png;base64,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" 
+                     alt="Дед Мороз" 
+                     style="width: 80px; height: 80px; border-radius: 12px; object-fit: cover; box-shadow: 0 4px 15px rgba(0,0,0,0.2); border: 3px solid white; transform: rotate(-5deg);">
+            </div>
+            <div class="feature-content">
+                <div class="feature-title">Дед Мороз, Снегурочка и еще много других героев поздравят ваших близких с Новым Годом!</div>
+                <div class="feature-link">→ Новогодние открытки / поздравления</div>
+            </div>
+        </a>
+
+        <a href="#" class="feature">
+            <div class="feature-icon">
+                <img src="data:image/png;base64,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" 
+                     alt="Мать и ребенок" 
+                     style="width: 80px; height: 80px; border-radius: 12px; object-fit: cover; box-shadow: 0 4px 15px rgba(0,0,0,0.2); border: 3px solid white; transform: rotate(3deg);">
+            </div>
+            <div class="feature-content">
+                <div class="feature-title">Сделать трогательный чёрно-белый снимок — как из семейного архива</div>
+                <div class="feature-link">→ Чёрно-белая близость</div>
+            </div>
+        </a>
+
+        <a href="#" class="feature">
+            <div class="feature-icon">
+                <img src="data:image/png;base64,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" 
+                     alt="Анимация" 
+                     style="width: 80px; height: 80px; border-radius: 12px; object-fit: cover; box-shadow: 0 4px 15px rgba(0,0,0,0.2); border: 3px solid white; transform: rotate(-3deg);">
+            </div>
+            <div class="feature-content">
+                <div class="feature-title">Оживить любимые фотографии и вернуть в них эмоции</div>
+                <div class="feature-link">→ Оживление фото</div>
+            </div>
+        </a>
+
+        <a href="#" class="feature">
+            <div class="feature-icon">
+                <img src="data:image/png;base64,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" 
+                     alt="Новогодний интерьер" 
+                     style="width: 80px; height: 80px; border-radius: 12px; object-fit: cover; box-shadow: 0 4px 15px rgba(0,0,0,0.2); border: 3px solid white; transform: rotate(4deg);">
+            </div>
+            <div class="feature-content">
+                <div class="feature-title">Создать новогодний дизайн своей квартиры — уютно, атмосферно, по-настоящему празднично</div>
+                <div class="feature-link">→ Дизайн интерьера</div>
+            </div>
+        </a>
+
+        <div class="cta-block">
+            <div class="cta-text">
+                <strong>20 медиа-токенов</strong> — это не «бонус».<br>
+                Это десятки эмоций, которыми можно поделиться с близкими в самый тёплый период года.
+            </div>
+            <a href="#" class="cta-button">Выбрать тариф 🎁</a>
+        </div>
+
+        <p class="footer-text">
+            👉 Супер-понедельник — только сегодня
+        </p>
+    </div>
+</body>
+</html>
