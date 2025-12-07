@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Обзор по конкурентам | neurosphere.pro</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --emerald: #4ecdc4;
+            --emerald-light: #7ee8df;
+            --emerald-dark: #2eb8af;
+            --emerald-bg: rgba(78, 205, 196, 0.1);
+            --purple: #c89bdb;
+            --purple-light: #ddb8e8;
+            --dark: #1a1a2e;
+            --gray: #2d2d44;
+            --light: #f8f9fa;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif;
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 50%, #f0f4f8 100%);
+            color: #2d2d44;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--emerald) 0%, #5fd4cc 100%);
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 20px rgba(78, 205, 196, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--dark);
+            letter-spacing: 1px;
+        }
+
+        .logo-neuro {
+            color: var(--dark);
+        }
+
+        .logo-sphere {
+            color: var(--white);
+        }
+
+        .header-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--dark);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .tabs-wrapper {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            border-bottom: 3px solid var(--emerald);
+            padding-bottom: 10px;
+            flex-wrap: wrap;
+        }
+
+        .tab-button {
+            padding: 12px 24px;
+            background: transparent;
+            border: 2px solid transparent;
+            border-radius: 10px 10px 0 0;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            color: #2d2d44;
+            transition: all 0.3s ease;
+        }
+
+        .tab-button:hover {
+            background: rgba(78, 205, 196, 0.1);
+            border-color: var(--emerald);
+        }
+
+        .tab-button.active {
+            background: var(--emerald);
+            color: var(--dark);
+            border-color: var(--emerald);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 60px;
+            align-items: center;
+        }
+
+        .hero-image {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(78, 205, 196, 0.3);
+            border: 3px solid var(--emerald);
+        }
+
+        .hero-content h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            color: var(--emerald);
+            margin-bottom: 20px;
+            font-weight: 800;
+        }
+
+        .hero-content p {
+            font-size: 1.1rem;
+            color: var(--light);
+            line-height: 1.8;
+        }
+
+        .section-title {
+            font-size: clamp(1.8rem, 3vw, 2.5rem);
+            color: var(--emerald);
+            margin-bottom: 30px;
+            font-weight: 700;
+            border-left: 6px solid var(--emerald);
+            padding-left: 20px;
+        }
+
+        .subsection-title {
+            font-size: 1.5rem;
+            color: var(--emerald-light);
+            margin: 40px 0 20px 0;
+            font-weight: 600;
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 28px;
+            margin-bottom: 20px;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--emerald) 0%, var(--emerald-light) 100%);
+        }
+
+        .card:hover {
+            border-color: var(--emerald);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(78, 205, 196, 0.25);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .platform-name {
+            font-size: clamp(1.4rem, 3vw, 1.9rem);
+            font-weight: 700;
+            color: var(--emerald);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .badge.current {
+            background: var(--emerald);
+            color: var(--dark);
+            box-shadow: 0 4px 15px rgba(78, 205, 196, 0.4);
+        }
+
+        .badge.watermark-yes {
+            background: rgba(255, 87, 87, 0.2);
+            color: #ff8787;
+            border: 2px solid #ff8787;
+            font-size: 0.75rem;
+        }
+
+        .badge.watermark-no {
+            background: rgba(78, 205, 196, 0.2);
+            color: var(--emerald-light);
+            border: 2px solid var(--emerald);
+            font-size: 0.75rem;
+        }
+
+        .badge.watermark-partial {
+            background: rgba(255, 165, 2, 0.2);
+            color: #ffb347;
+            border: 2px solid #ffa502;
+            font-size: 0.75rem;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .info-block {
+            background: var(--emerald-bg);
+            padding: 18px;
+            border-radius: 12px;
+            border-left: 4px solid var(--emerald);
+            transition: all 0.3s ease;
+        }
+
+        .info-block:hover {
+            background: rgba(78, 205, 196, 0.15);
+            border-left-width: 6px;
+        }
+
+        .info-label {
+            font-size: 0.85rem;
+            color: var(--emerald-light);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 8px;
+        }
+
+        .info-value {
+            font-size: 1.15rem;
+            color: #1a1a2e;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            background: #ffffff;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .comparison-table th {
+            background: var(--emerald);
+            color: var(--dark);
+            padding: 18px;
+            text-align: left;
+            font-weight: 700;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .comparison-table td {
+            padding: 18px;
+            border-bottom: 1px solid rgba(78, 205, 196, 0.15);
+            font-size: 0.95rem;
+            color: #2d2d44;
+        }
+
+        .comparison-table tr:hover {
+            background: rgba(78, 205, 196, 0.08);
+        }
+
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .status-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            font-weight: 700;
+            margin-right: 8px;
+            font-size: 1rem;
+        }
+
+        .status-icon.critical {
+            background: #ff4757;
+            color: white;
+        }
+
+        .status-icon.warning {
+            background: #ffa502;
+            color: white;
+        }
+
+        .status-icon.ok {
+            background: var(--emerald);
+            color: var(--dark);
+        }
+
+        .status-icon.question {
+            background: var(--purple);
+            color: var(--dark);
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(78, 205, 196, 0.08) 0%, rgba(94, 212, 204, 0.05) 100%);
+            border: 3px solid var(--emerald);
+            border-radius: 16px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 4px 20px rgba(78, 205, 196, 0.15);
+        }
+
+        .highlight-title {
+            font-size: 1.8rem;
+            color: var(--emerald);
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .highlight-item {
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(78, 205, 196, 0.3);
+        }
+
+        .highlight-item:last-child {
+            border-bottom: none;
+        }
+
+        .highlight-item strong {
+            color: #2eb8af;
+        }
+
+        .metric-row {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin: 15px 0;
+        }
+
+        .metric {
+            background: rgba(78, 205, 196, 0.2);
+            border: 2px solid var(--emerald);
+            border-radius: 10px;
+            padding: 10px 20px;
+            font-weight: 600;
+            color: var(--emerald-light);
+        }
+
+        .divider {
+            height: 3px;
+            background: linear-gradient(90deg, transparent 0%, var(--emerald) 50%, transparent 100%);
+            margin: 50px 0;
+        }
+
+        @media (max-width: 968px) {
+            .hero-section {
+                grid-template-columns: 1fr;
+            }
+
+            .header {
+                padding: 15px 20px;
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .header-title {
+                font-size: 1rem;
+            }
+
+            .card {
+                padding: 20px;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .comparison-table {
+                font-size: 0.85rem;
+            }
+
+            .comparison-table th,
+            .comparison-table td {
+                padding: 12px;
+            }
+        }
+
+        .emerald-glow {
+            text-shadow: 0 0 20px rgba(78, 205, 196, 0.5);
+        }
+
+        .benchmark-label {
+            background: linear-gradient(135deg, var(--emerald) 0%, var(--emerald-light) 100%);
+            color: var(--dark);
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-weight: 700;
+            display: inline-block;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">
+            <div class="logo-text">
+                <span class="logo-neuro">NEURO</span><span class="logo-sphere">SPHERE</span>
+            </div>
+        </div>
+        <div class="header-title">Обзор по конкурентам</div>
+    </div>
+
+    <div class="container">
+        <!-- TABS -->
+        <div class="tabs-wrapper">
+            <button class="tab-button active" onclick="switchTab('comparison')">Сравнение с конкурентами</button>
+            <button class="tab-button" onclick="switchTab('strategy')">Стратегия увеличения токенов</button>
+            <button class="tab-button" onclick="switchTab('competitors')">Детали конкурентов</button>
+            <button class="tab-button" onclick="switchTab('benchmarks')">Бенчмарки</button>
+        </div>
+
+        <!-- TAB 1: COMPARISON -->
+        <div id="comparison" class="tab-content active">
+            <!-- СРАВНЕНИЕ С КОНКУРЕНТАМИ -->
+            <h2 class="section-title">Сравнение neurosphere с конкурентами</h2>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Параметр</th>
+                        <th>neurosphere</th>
+                        <th>Конкуренты</th>
+                        <th>Разница</th>
+                        <th>Статус</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Бесплатный лимит</strong></td>
+                        <td>2 генерации</td>
+                        <td>20-100 генераций</td>
+                        <td>neurosphere даёт в 10-50 РАЗ МЕНЬШЕ</td>
+                        <td><span class="status-icon critical">❌</span> КРИТИЧЕСКАЯ ПРОБЛЕМА</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Watermark</strong></td>
+                        <td>НЕТ</td>
+                        <td>2 из 5 конкурентов используют</td>
+                        <td>Двое из пяти конкурентов используют watermark на бесплатном тарифе</td>
+                        <td><span class="status-icon question">?</span> Очень под вопросом надо ли ставить</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Конверсия</strong></td>
+                        <td>3.40%</td>
+                        <td>5-11%</td>
+                        <td>neurosphere ниже на 40-70%</td>
+                        <td><span class="status-icon warning">⚠️</span> ПРОБЛЕМА</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Цены</strong></td>
+                        <td>$9-29</td>
+                        <td>$8-99</td>
+                        <td>В диапазоне рынка</td>
+                        <td><span class="status-icon ok">✓</span> ОК</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- TAB 2: STRATEGY -->
+        <div id="strategy" class="tab-content">
+            <h2 class="section-title">Увеличиваем бесплатные токены</h2>
+            
+            <div class="highlight-box">
+                <div class="highlight-title">📊 Ключевые допущения модели</div>
+                <div class="highlight-item">
+                    <p><strong>Константы:</strong> Регистрации, ARPU, себестоимость токена, доля себестоимости одинаковы для всех сценариев.</p>
+                </div>
+                <div class="highlight-item">
+                    <p><strong>Переменные:</strong> Количество бесплатных токенов на регистрацию и конверсия регистрация → оплата.</p>
+                </div>
+                <div class="highlight-item">
+                    <p><strong>Дельта прироста:</strong> Разница прибыли сценария vs baseline (текущая модель бесплатных токенов).</p>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <h3 class="subsection-title">Сценарии и прогнозы</h3>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="platform-name">Сценарий 1: 5 токенов + CR 7%</div>
+                    <span class="badge ok" style="background: var(--emerald); color: var(--dark);">ЛУЧШИЙ</span>
+                </div>
+                <div class="info-grid">
+                    <div class="info-block">
+                        <div class="info-label">Бесплатные токены</div>
+                        <div class="info-value">5 токенов</div>
+                    </div>
+                    <div class="info-block">
+                        <div class="info-label">Конверсия (CR)</div>
+                        <div class="info-value">7%</div>
+                    </div>
+                    <div class="info-block">
+                        <div class="info-label">Прирост прибыли</div>
+                        <div class="info-value" style="color: var(--emerald);">≈ 3 161 000 ₽</div>
+                    </div>
+                    <div class="info-block">
+                        <div class="info-label">Итоговая прибыль</div>
+                        <div class="info-value" style="color: var(--emerald); font-size: 1.3rem;">≈ 5 257 500 ₽</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="platform-name">Сценарий 2: 5 токенов + CR 6%</div>
+                </div>
+                <div class="info-grid">
+                    <div class="info-block">
+                        <div class="info-label">Бесплатные токены</div>
+                        <div class="info-value">5 токенов</div>
+                    </div>
+                    <div class="info-block">
+                        <div class="info-label">Конверсия (CR)</div>
+                        <div class="info-value">6%</div>
+                    </div>
+                    <div class="info-block">
+                        <div class="info-label">Прирост прибыли</div>
+                        <div class="info-value" style="color: var(--emerald);">≈ 1 838 500 ₽</div>
+                    </div>
+                    <div class="info-block">
+                        <div class="info-label">Итоговая прибыль</div>
+                        <div class="info-value" style="color: var(--emerald); font-size: 1.3rem;">≈ 3 935 000 ₽</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="platform-name">Сценарий 3: 7 токенов + CR 7%</div>
+                </div>
+                <div class="info-grid">
+                    <div class="info-block">
+                        <div class="info-label">Бесплатные токены</div>
+                        <div class="info-value">7 токенов</div>
+                    </div>
+                    <div class="info-block">
+                        <div class="info-label">Конверсия (CR)</div>
+                        <div class="info-value">7%</div>
+                    </div>
+                    <div class="info-block">
+                        <div class="info-label">Прирост прибыли</div>
+                        <div class="info-value" style="color: var(--emerald);">≈ 1 561 000 ₽</div>
+                    </div>
+                    <div class="info-block">
+                        <div class="info-label">Итоговая прибыль</div>
+                        <div class="info-value" style="color: var(--emerald); font-size: 1.3rem;">≈ 3 657 500 ₽</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="highlight-box">
+                <div class="highlight-title">🎯 Следующие шаги</div>
+                <div class="highlight-item">
+                    <strong style="color: var(--emerald);">Шаг 1: A/B-тест</strong>
+                    <p style="margin-top: 10px; color: #2d2d44;">Взять на A/B-тест 1–2 лучших сценария с максимальной дельтой прибыли и приемлемым ростом затрат.</p>
+                </div>
+                <div class="highlight-item">
+                    <strong style="color: var(--emerald);">Шаг 2: Замеры</strong>
+                    <p style="margin-top: 10px; color: #2d2d44;">На тесте замерить фактический uplift конверсии, ARPU и удержание пользователей.</p>
+                </div>
+                <div class="highlight-item">
+                    <strong style="color: var(--emerald);">Шаг 3: Масштабирование</strong>
+                    <p style="margin-top: 10px; color: #2d2d44;">При подтверждении гипотезы масштабировать сценарий, зафиксировав потолок бюджета на бесплатные токены.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 3: COMPETITORS DETAILS -->
+        <div id="competitors" class="tab-content">
+        <!-- ПРЯМЫЕ КОНКУРЕНТЫ -->
+        <h2 class="section-title">Прямые конкуренты</h2>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="platform-name">neurosphere.pro (ТЕКУЩАЯ)</div>
+                <span class="badge current">ТЕКУЩАЯ</span>
+                <span class="badge watermark-no">На бесплатном тарифе нет watermark</span>
+            </div>
+            <div class="info-grid">
+                <div class="info-block">
+                    <div class="info-label">Бесплатный лимит</div>
+                    <div class="info-value">2 изображения ИЛИ 1 видео</div>
+                </div>
+                <div class="info-block">
+                    <div class="info-label">Платные тарифы</div>
+                    <div class="info-value">890₽ / 1,690₽ / 2,790₽ ($9-29)</div>
+                </div>
+                <div class="info-block">
+                    <div class="info-label">Конверсия</div>
+                    <div class="info-value">3.40% (среднее сен-окт-нояб)</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="platform-name">OpenArt.ai</div>
+                <span class="badge watermark-no">На бесплатном тарифе нет watermark</span>
+            </div>
+            <div class="info-grid">
+                <div class="info-block">
+                    <div class="info-label">Бесплатный лимит</div>
+                    <div class="info-value">~100 генераций/мес (500 credits, 1 генер = ~5 credits)</div>
+                </div>
+                <div class="info-block">
+                    <div class="info-label">Платные тарифы</div>
+                    <div class="info-value">$9.99 (Starter) / $19.99 (Hobbyist) / $49.99 (Pro)</div>
+                </div>
+                <div class="info-block">
+                    <div class="info-label">Особенности</div>
+                    <div class="info-value">Огромный выбор моделей (DALL-E, SD, MJ-style), community workflows</div>
+                </div>
+                <div class="info-block">
+                    <div class="info-label">Типы контента</div>
+                    <div class="info-value">Изображения</div>
+                </div>
+                <div class="info-block">
+                    <div class="info-label">Конверсия</div>
+                    <div class="info-value">5-8% (оценка)</div>
+                </div>
+                <div class="info-block">
+                    <div class="info-label">Источник данных</div>
+                    <div class="info-value">Публичная инфа, отзывы</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="platform-name">Higgsfield.ai</div>
+                <span class="badge watermark-yes">На бесплатном тарифе есть watermark</span>
+            </div>
+            <div class="info-grid">
+                <div class="info-block">
+                    <div class="info-label">Бесплатный лимит</div>
+                    <div class="info-value">30 видео/мес (720p, до 4 сек)</div>
+                </div>
+                <div class="info-block">
+                    <div class="info-label">Платные тарифы</div>
+                    <div class="info-value">$10 (Basic) / $24 (Creator) / $48 (Pro)</div>
+                </div>
+                <div class="info-block">
+                    <div class="info-label">Особенности</div>
+                    <div class="info-value">Фокус на selfie-to-video, интеграция с TikTok/Instagram</div>
+                </div>
+                <div class="info-block">
+                    <div class="info-label">Типы контента</div>
+                    <div class="info-value">Видео</div>
+                </div>
+                <div class="info-block">
+                    <div class="info-label">Конверсия</div>
+                    <div class="info-value">6-10% (оценка)</div>
+                </div>
+                <div class="info-block">
+                    <div class="info-label">Источник данных</div>
+                    <div class="info-value">Публичная инфа</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="platform-name">Pollo.ai</div>
+                <span class="badge watermark-yes">На бесплатном тарифе есть watermark</span>
+            </div>
+            <div class="info-grid">
+                <div class="info-block">
+                    <div class="info-label">Бесплатный лимит</div>
+                    <div class="info-value">~30-50 генераций/мес (daily free credits)</div>
+                </div>
+                <div class="info-block">
+                    <div class="info-label">Платные тарифы</div>
+                    <div class="info-value">$9 (Starter) / $29 (Creator) / $99 (Pro)</div>
+                </div>
+                <div class="info-block">
+                    <div class="info-label">Особенности</div>
+                    <div class="info-value">Text-to-video, image-to-video, camera controls</div>
+                </div>
+                <div class="info-block">
+                    <div class="info-label">Типы контента</div>
+                    <div class="info-value">Видео</div>
+                </div>
+                <div class="info-block">
+                    <div class="info-label">Конверсия</div>
+                    <div class="info-value">7-11% (оценка)</div>
+                </div>
+                <div class="info-block">
+                    <div class="info-label">Источник данных</div>
+                    <div class="info-value">Публичная инфа, отзывы</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="platform-name">Syntx.ai</div>
+                <span class="badge watermark-no">На бесплатном тарифе нет watermark</span>
+            </div>
+            <div class="info-grid">
+                <div class="info-block">
+                    <div class="info-label">Бесплатный лимит</div>
+                    <div class="info-value">~20-50 генераций/мес (оценка)</div>
+                </div>
+                <div class="info-block">
+                    <div class="info-label">Платные тарифы</div>
+                    <div class="info-value">$7.57 - $35.10</div>
+                </div>
+                <div class="info-block">
+                    <div class="info-label">Особенности</div>
+                    <div class="info-value">Multi-modal платформа</div>
+                </div>
+                <div class="info-block">
+                    <div class="info-label">Типы контента</div>
+                    <div class="info-value">Текст, изображения, возможно видео</div>
+                </div>
+                <div class="info-block">
+                    <div class="info-label">Конверсия</div>
+                    <div class="info-value">6-9% (оценка)</div>
+                </div>
+                <div class="info-block">
+                    <div class="info-label">Источник данных</div>
+                    <div class="info-value">Публичная инфа, отзывы</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="platform-name">Easy-Peasy.ai</div>
+                <span class="badge watermark-no">На бесплатном тарифе нет watermark</span>
+            </div>
+            <div class="info-grid">
+                <div class="info-block">
+                    <div class="info-label">Бесплатный лимит</div>
+                    <div class="info-value">~20-100 генераций/мес (зависит от типа, credits system)</div>
+                </div>
+                <div class="info-block">
+                    <div class="info-label">Платные тарифы</div>
+                    <div class="info-value">$5-30 (оценка)</div>
+                </div>
+                <div class="info-block">
+                    <div class="info-label">Особенности</div>
+                    <div class="info-value">All-in-one AI assistant, templates library, Chrome extension</div>
+                </div>
+                <div class="info-block">
+                    <div class="info-label">Типы контента</div>
+                    <div class="info-value">Текст, изображения, аудио</div>
+                </div>
+                <div class="info-block">
+                    <div class="info-label">Конверсия</div>
+                    <div class="info-value">6-9% (оценка)</div>
+                </div>
+                <div class="info-block">
+                    <div class="info-label">Источник данных</div>
+                    <div class="info-value">Публичная инфа, отзывы</div>
+                </div>
+            </div>
+        </div>
+
+        </div>
+
+        <!-- TAB 4: BENCHMARKS -->
+        <div id="benchmarks" class="tab-content">
+        <div class="divider"></div>
+
+        <!-- БЕНЧМАРКИ -->
+        <h2 class="section-title">Бенчмарки</h2>
+        <div class="benchmark-label">Не прямые конкуренты, но с watermark</div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="platform-name">InVideo</div>
+                <span class="badge watermark-yes">✅ ДА (на экспорте)</span>
+            </div>
+            <div class="info-grid">
+                <div class="info-block">
+                    <div class="info-label">Бесплатный лимит</div>
+                    <div class="info-value">Ограниченные функции, watermark на экспорте</div>
+                </div>
+                <div class="info-block">
+                    <div class="info-label">Платные тарифы</div>
+                    <div class="info-value">$15-60</div>
+                </div>
+                <div class="info-block">
+                    <div class="info-label">Особенности</div>
+                    <div class="info-value">Video editing с AI, watermark removal - главная причина upgrade</div>
+                </div>
+                <div class="info-block">
+                    <div class="info-label">Типы контента</div>
+                    <div class="info-value">Видео редактирование</div>
+                </div>
+                <div class="info-block">
+                    <div class="info-label">Конверсия</div>
+                    <div class="info-value">10-15%</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="platform-name">Kapwing</div>
+                <span class="badge watermark-yes">✅ ДА</span>
+            </div>
+            <div class="info-grid">
+                <div class="info-block">
+                    <div class="info-label">Бесплатный лимит</div>
+                    <div class="info-value">Базовые функции, watermark</div>
+                </div>
+                <div class="info-block">
+                    <div class="info-label">Платные тарифы</div>
+                    <div class="info-value">$16-60</div>
+                </div>
+                <div class="info-block">
+                    <div class="info-label">Особенности</div>
+                    <div class="info-value">Video editing, 70% платящих называют watermark removal причиной</div>
+                </div>
+                <div class="info-block">
+                    <div class="info-label">Типы контента</div>
+                    <div class="info-value">Видео редактирование</div>
+                </div>
+                <div class="info-block">
+                    <div class="info-label">Конверсия</div>
+                    <div class="info-value">12%</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="platform-name">Canva</div>
+                <span class="badge watermark-partial">⚠️ Частично (маркировка premium)</span>
+            </div>
+            <div class="info-grid">
+                <div class="info-block">
+                    <div class="info-label">Бесплатный лимит</div>
+                    <div class="info-value">Free план с ограничениями, premium элементы с короной</div>
+                </div>
+                <div class="info-block">
+                    <div class="info-label">Платные тарифы</div>
+                    <div class="info-value">$12.99-30</div>
+                </div>
+                <div class="info-block">
+                    <div class="info-label">Особенности</div>
+                    <div class="info-value">Дизайн платформа, premium content</div>
+                </div>
+                <div class="info-block">
+                    <div class="info-label">Типы контента</div>
+                    <div class="info-value">Дизайн</div>
+                </div>
+                <div class="info-block">
+                    <div class="info-label">Конверсия</div>
+                    <div class="info-value">6-7%</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="platform-name">Remove.bg</div>
+                <span class="badge watermark-yes">✅ ДА (на preview)</span>
+            </div>
+            <div class="info-grid">
+                <div class="info-block">
+                    <div class="info-label">Бесплатный лимит</div>
+                    <div class="info-value">Preview с watermark</div>
+                </div>
+                <div class="info-block">
+                    <div class="info-label">Платные тарифы</div>
+                    <div class="info-value">$9-200</div>
+                </div>
+                <div class="info-block">
+                    <div class="info-label">Особенности</div>
+                    <div class="info-value">Background removal, watermark на preview</div>
+                </div>
+                <div class="info-block">
+                    <div class="info-label">Типы контента</div>
+                    <div class="info-value">Обработка изображений</div>
+                </div>
+                <div class="info-block">
+                    <div class="info-label">Конверсия</div>
+                    <div class="info-value">8-12%</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="platform-name">Loom</div>
+                <span class="badge watermark-yes">✅ ДА (брендинг)</span>
+            </div>
+            <div class="info-grid">
+                <div class="info-block">
+                    <div class="info-label">Бесплатный лимит</div>
+                    <div class="info-value">Recorded with Loom watermark</div>
+                </div>
+                <div class="info-block">
+                    <div class="info-label">Платные тарифы</div>
+                    <div class="info-value">$8-16</div>
+                </div>
+                <div class="info-block">
+                    <div class="info-label">Особенности</div>
+                    <div class="info-value">Screen recording, viral coefficient 2.0-3.0 благодаря watermark</div>
+                </div>
+                <div class="info-block">
+                    <div class="info-label">Типы контента</div>
+                    <div class="info-value">Видео запись экрана</div>
+                </div>
+                <div class="info-block">
+                    <div class="info-label">Конверсия</div>
+                    <div class="info-value">4-6%</div>
+                </div>
+            </div>
+        </div>
+
+        </div>
+
+        </div>
+
+    </div>
+
+    <script>
+        function switchTab(tabName) {
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Remove active from all tab buttons
+            document.querySelectorAll('.tab-button').forEach(button => {
+                button.classList.remove('active');
+            });
+            
+            // Show selected tab content
+            document.getElementById(tabName).classList.add('active');
+            
+            // Mark clicked tab button as active
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>
